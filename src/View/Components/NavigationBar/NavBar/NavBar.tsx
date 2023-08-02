@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 // interface Links {
 //     url: string
@@ -19,7 +19,7 @@ const NavBar = () => {
                 <NavLink to={link.url}>{link.title}</NavLink>
             ))} */}
         </div>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

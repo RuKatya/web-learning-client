@@ -17,7 +17,7 @@ const RouterPage = () => {
                 <Route index element={<HomePage />} />
                 <Route path="auth" element={<Auth />}>
                     <Route index element={<Login />} />
-                    <Route path="registretion" element={<Register />} />
+                    <Route path="registration" element={<Register />} />
                 </Route>
             </Route>
         )

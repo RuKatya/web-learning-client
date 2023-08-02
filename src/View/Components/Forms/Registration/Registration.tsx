@@ -1,10 +1,14 @@
 import css from './Registration.module.scss';
 
 import { FC, FormEvent } from 'react';
-import { Form } from 'react-router-dom';
-import useInput from '../../../../hooks/useInput';
-import Input from '../../Input';
 import axios, { AxiosResponse } from 'axios';
+import { IAxiosRegistration } from '../types';
+import useInput from '../../../../hooks/useInput';
+
+import { Form } from 'react-router-dom';
+import Input from '../../Input';
+import { thunk } from '../../../../app/auth/authReducer';
+import { useAppDispatch } from '../../../../app/hooks';
 
 interface IFormProps {}
 
@@ -13,28 +17,19 @@ const Registration: FC<IFormProps> = props => {
     const email = useInput('bbb@mail.ru');
     const password = useInput('qwe123!');
     const confirmPassword = useInput('qwe123!');
+    const dispatch = useAppDispatch();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log('submit registration');
-
-        axios
-            .post('http://localhost:8080/auth/save-user', {
+        dispatch(
+            thunk.regThunk({
                 userName: userName.value,
                 email: email.value,
                 password: password.value,
                 confirmPassword: confirmPassword.value,
             })
-            .then(
-                (
-                    data: AxiosResponse<{
-                        continueWork: boolean;
-                        message: string;
-                    }>
-                ) => console.log(data)
-            )
-            .catch(e => console.log(e));
+        );
     };
 
     return (

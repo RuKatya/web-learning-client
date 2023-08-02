@@ -1,11 +1,7 @@
-import React from 'react'
+import { Login as LoginForm } from '../../../Components/Forms';
 
 const Login = () => {
-    return (
-        <div>
-            <h1>LOGIN</h1>
-        </div>
-    )
-}
+    return <LoginForm />;
+};
 
-export default Login
+export default Login;

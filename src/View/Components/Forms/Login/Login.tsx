@@ -1,16 +1,35 @@
 import css from './LoginForm.module.scss';
 
-import axios from 'axios';
-import { FC, FormEvent } from 'react';
-import { Form } from 'react-router-dom';
-import useInput from '../../../../hooks/useInput';
+import { FC, FormEvent, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
+import { thunk } from '../../../../app/auth/authReducer';
+import { auth } from '../../../../app/auth/selectors';
+
 import Input from '../../Input';
+import useInput from '../../../../hooks/useInput';
+import { Form, useNavigate } from 'react-router-dom';
 
 interface IFormProps {}
 
 const Login: FC<IFormProps> = props => {
-    const email = useInput('');
-    const password = useInput('');
+    const email = useInput('qwe123@mail.ru');
+    const password = useInput('qwe123!');
+
+    const dispatch = useAppDispatch();
+    const authData = useAppSelector(auth);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let timerId: any;
+        if (authData.continueWork) {
+            timerId = setTimeout(() => {
+                navigate('/');
+            }, 4000);
+        }
+        return () => clearTimeout(timerId);
+        // eslint-disable-next-line
+    }, [authData.continueWork]);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -20,15 +39,9 @@ const Login: FC<IFormProps> = props => {
             return;
         }
 
-        console.log('submit login');
-
-        axios
-            .post('http://localhost:8080/auth/login-user', {
-                email: email.value,
-                password: password.value,
-            })
-            .then(data => console.log(data))
-            .catch(e => console.log(e));
+        dispatch(
+            thunk.loginThunk({ email: email.value, password: password.value })
+        );
     };
 
     return (
@@ -40,7 +53,7 @@ const Login: FC<IFormProps> = props => {
         >
             <h3 className={css.loginForm__title}>Login</h3>
             <div>
-                <Input {...email} placeholder="Type name..." />
+                <Input {...email} placeholder="Type email..." />
             </div>
             <div>
                 <Input
@@ -50,6 +63,7 @@ const Login: FC<IFormProps> = props => {
                 />
             </div>
             <button type="submit">Search</button>
+            {authData.message ? <div>{authData.message}</div> : null}
         </Form>
     );
 };

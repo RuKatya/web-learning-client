@@ -2,10 +2,10 @@
 import { FC, ChangeEvent, InputHTMLAttributes } from 'react';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    type?: string;
     value: string;
-    placeholder?: string;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    // type?: string;
+    // placeholder?: string;
 }
 
 const Input: FC<IInputProps> = ({
