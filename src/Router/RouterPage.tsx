@@ -1,9 +1,14 @@
-import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import App from "../App";
-import HomePage from "../View/Pages/HomePage/HomePage";
-import Auth from "../View/Pages/Auth/Auth";
-import Login from "../View/Pages/Auth/Login/Login";
-import Register from "../View/Pages/Auth/Register/Register";
+import {
+    RouterProvider,
+    Route,
+    createBrowserRouter,
+    createRoutesFromElements,
+} from 'react-router-dom';
+import App from '../App';
+import HomePage from '../View/Pages/HomePage/HomePage';
+import Auth from '../View/Pages/Auth/Auth';
+import Login from '../View/Pages/Auth/Login/Login';
+import Register from '../View/Pages/Auth/Register/Register';
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -16,9 +21,9 @@ const RouterPage = () => {
                 </Route>
             </Route>
         )
-    )
+    );
 
-    return <RouterProvider router={router} />
-}
+    return <RouterProvider router={router} />;
+};
 
-export default RouterPage
+export default RouterPage;
