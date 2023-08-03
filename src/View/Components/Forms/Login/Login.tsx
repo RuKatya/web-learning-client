@@ -2,47 +2,68 @@ import css from './LoginForm.module.scss';
 
 import { FC, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { thunk } from '../../../../app/auth/authReducer';
-import { auth } from '../../../../app/auth/selectors';
+import { clearErrorMessage, thunk } from '../../../../app/auth/authReducer';
+import { auth, authUser } from '../../../../app/auth/selectors';
 
 import Input from '../../Input';
 import useInput from '../../../../hooks/useInput';
-import { Form, useNavigate } from 'react-router-dom';
+import { Form, Link, useNavigate } from 'react-router-dom';
+import { IInputForm } from '../types';
+
+import { validateEmail, validatePassword } from '../validate';
+import Button, { EButtonPosition, EButtonSize } from '../../Button/Button';
 
 interface IFormProps {}
 
 const Login: FC<IFormProps> = props => {
-    const email = useInput('qwe123@mail.ru');
-    const password = useInput('qwe123!');
+    const email = useInput('qwe123@mail.ruww', validateEmail);
+    const password = useInput('qwe123!', validatePassword);
 
     const dispatch = useAppDispatch();
-    const authData = useAppSelector(auth);
+    const { continueWork, message } = useAppSelector(auth);
+    const { isLogin } = useAppSelector(authUser);
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (isLogin) {
+            navigate('/');
+        }
+    }, []);
+
+    useEffect(() => {
         let timerId: any;
-        if (authData.continueWork) {
+        if (continueWork) {
             timerId = setTimeout(() => {
                 navigate('/');
+                dispatch(clearErrorMessage());
             }, 4000);
         }
         return () => clearTimeout(timerId);
         // eslint-disable-next-line
-    }, [authData.continueWork]);
+    }, [continueWork]);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        if (!email) {
-            console.log('error');
-            return;
-        }
 
         dispatch(
             thunk.loginThunk({ email: email.value, password: password.value })
         );
     };
+
+    const inputsLogin: IInputForm[] = [
+        {
+            ...email,
+            name: 'email',
+            placeholder: 'Type email...',
+        },
+        {
+            ...password,
+            type: 'password',
+            name: 'password',
+            placeholder: 'Type password...',
+        },
+    ];
 
     return (
         <Form
@@ -52,18 +73,29 @@ const Login: FC<IFormProps> = props => {
             onSubmit={handleSubmit}
         >
             <h3 className={css.loginForm__title}>Login</h3>
-            <div>
-                <Input {...email} placeholder="Type email..." />
-            </div>
-            <div>
-                <Input
-                    {...password}
-                    placeholder="Type password..."
-                    type="password"
-                />
-            </div>
-            <button type="submit">Search</button>
-            {authData.message ? <div>{authData.message}</div> : null}
+            {message && continueWork ? (
+                <div className={css.success}>{message}</div>
+            ) : null}
+            {message && !continueWork ? (
+                <div className={css.error}>{message}</div>
+            ) : null}
+
+            {inputsLogin.map(el => (
+                <Input key={el.name} {...el} />
+            ))}
+
+            <Button
+                style={{ margin: '0 auto' }}
+                type="submit"
+                size={EButtonSize.MEDIUM}
+                position={EButtonPosition.CENTER}
+            >
+                Log in
+            </Button>
+
+            <p className={css.isReg}>
+                Don't have an account? <Link to="reg">Sign Up</Link>
+            </p>
         </Form>
     );
 };

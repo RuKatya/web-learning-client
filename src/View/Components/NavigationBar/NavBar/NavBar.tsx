@@ -1,4 +1,7 @@
 import { NavLink } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+// import { authUser } from '../../../../app/auth/selectors';
+// import { useAppSelector } from '../../../../app/hooks';
 
 // interface Links {
 //     url: string
@@ -12,8 +15,12 @@ import { NavLink } from 'react-router-dom';
 // ]
 
 const NavBar = () => {
+    // const { isLogin } = useAppSelector(authUser);
+    // const navigate = useNavigate();
+
     return (
         <div>
+            {/* {!isLogin ? <NavLink to="/auth">Sign In</NavLink> : null} */}
             <NavLink to="/auth">Sign In</NavLink>
             {/* {linksForUser.map(link => (
                 <NavLink to={link.url}>{link.title}</NavLink>

@@ -1,7 +1,19 @@
 .regForm {
+    max-width: 350px;
+
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+
     color: red;
     .regForm__title {
     }
     .regForm__submit_btn {
+    }
+    .success {
+        color: green;
+    }
+    .error {
+        color: red;
     }
 }

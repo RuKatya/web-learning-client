@@ -1,5 +1,17 @@
 .loginForm {
+    max-width: 350px;
+
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+
     &__title {
-        color: yellow;
+        color: blue;
+    }
+    .error {
+        color: red;
+    }
+    .success {
+        color: green;
     }
 }
