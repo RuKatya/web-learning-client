@@ -3,7 +3,7 @@ import css from './LoginForm.module.scss';
 import { FC, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { clearErrorMessage, thunk } from '../../../../app/auth/authReducer';
-import { auth, authUser } from '../../../../app/auth/selectors';
+import { auth } from '../../../../app/auth/selectors';
 
 import Input from '../../Input';
 import useInput from '../../../../hooks/useInput';
@@ -12,6 +12,7 @@ import { IInputForm } from '../types';
 
 import { validateEmail, validatePassword } from '../validate';
 import Button, { EButtonPosition, EButtonSize } from '../../Button/Button';
+import StatusMessage from '../StatusMessage/StatusMessage';
 
 interface IFormProps {}
 
@@ -20,13 +21,17 @@ const Login: FC<IFormProps> = props => {
     const password = useInput('qwe123!', validatePassword);
 
     const dispatch = useAppDispatch();
-    const { continueWork, message } = useAppSelector(auth);
-    const { isLogin } = useAppSelector(authUser);
+    const {
+        message,
+        continueWork,
+        status,
+        user: { isLogin, userRole },
+    } = useAppSelector(auth);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isLogin) {
+        if (isLogin && userRole === 'user') {
             navigate('/');
         }
     }, []);
@@ -35,9 +40,9 @@ const Login: FC<IFormProps> = props => {
         let timerId: any;
         if (continueWork) {
             timerId = setTimeout(() => {
-                navigate('/');
                 dispatch(clearErrorMessage());
-            }, 4000);
+                navigate('/');
+            }, 3000);
         }
         return () => clearTimeout(timerId);
         // eslint-disable-next-line
@@ -65,6 +70,10 @@ const Login: FC<IFormProps> = props => {
         },
     ];
 
+    const statusMessage = message ? (
+        <StatusMessage continueWork={continueWork} message={message} />
+    ) : null;
+
     return (
         <Form
             className={css.loginForm}
@@ -73,12 +82,7 @@ const Login: FC<IFormProps> = props => {
             onSubmit={handleSubmit}
         >
             <h3 className={css.loginForm__title}>Login</h3>
-            {message && continueWork ? (
-                <div className={css.success}>{message}</div>
-            ) : null}
-            {message && !continueWork ? (
-                <div className={css.error}>{message}</div>
-            ) : null}
+            {statusMessage}
 
             {inputsLogin.map(el => (
                 <Input key={el.name} {...el} />
@@ -89,11 +93,11 @@ const Login: FC<IFormProps> = props => {
                 type="submit"
                 size={EButtonSize.MEDIUM}
                 position={EButtonPosition.CENTER}
+                disabled={status === 'loading'}
             >
                 Log in
             </Button>
-
-            <p className={css.isReg}>
+            <p className={css.question}>
                 Don't have an account? <Link to="reg">Sign Up</Link>
             </p>
         </Form>

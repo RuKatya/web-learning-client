@@ -1,8 +1,9 @@
 export type StatusT = 'idle' | 'loading' | 'failed';
+export type UserRoleT = 'user' | 'admin' | '';
 
 export interface IUser {
     userName: string;
-    userRole: string;
+    userRole: UserRoleT;
     isLogin: boolean;
 }
 

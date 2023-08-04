@@ -35,3 +35,10 @@ export const validatePassword = (password: string) => {
     }
     return '';
 };
+export const validateSimilarityPass =
+    (password: string) => (retryPass: string) => {
+        if (password !== retryPass) {
+            return 'Passwords are not the same';
+        }
+        return '';
+    };

@@ -1,4 +1,4 @@
-import { createSlice, Action, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { IAuthState } from './types';
 
@@ -22,6 +22,14 @@ const authSlice = createSlice({
         clearErrorMessage(state) {
             state.message = '';
         },
+        logout(state) {
+            state.continueWork = false;
+            state.user = {
+                isLogin: false,
+                userRole: '',
+                userName: '',
+            };
+        },
     },
     extraReducers: builder => {
         builder
@@ -39,16 +47,25 @@ const authSlice = createSlice({
             .addCase(regThunk.rejected, state => {
                 state.status = 'failed';
             })
-            .addCase(loginThunk.pending, (state, { payload }: any) => {
+            .addCase(loginThunk.pending, state => {
                 state.status = 'loading';
             })
             .addCase(
                 loginThunk.fulfilled,
-                (state, { payload: { message, continueWork } }: any) => {
+                (
+                    state,
+                    {
+                        payload: { message, continueWork, userRole, userName },
+                    }: any
+                ) => {
                     state.status = 'idle';
                     state.message = message;
-                    state.user.isLogin = true;
                     state.continueWork = continueWork;
+                    state.user = {
+                        isLogin: true,
+                        userRole: userRole,
+                        userName: userName,
+                    };
                 }
             )
             .addCase(loginThunk.rejected, (state, { payload }: any) => {
@@ -58,7 +75,7 @@ const authSlice = createSlice({
     },
 });
 
-export const { clearErrorMessage } = authSlice.actions;
+export const { clearErrorMessage, logout } = authSlice.actions;
 export const thunk = { regThunk, loginThunk };
 
 export default authSlice.reducer;

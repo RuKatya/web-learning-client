@@ -7,27 +7,23 @@ import {
 
 export const regThunk = createAsyncThunk(
     'auth/save-user',
-    async (state: any) => {
-        try {
-            const { userName, email, password, confirmPassword } = state;
+    async (state: any, { rejectWithValue }) => {
+        const { userName, email, password, confirmPassword } = state;
 
-            return await axios
-                .post('http://localhost:8080/auth/save-user', {
-                    userName,
-                    email,
-                    password,
-                    confirmPassword,
-                })
-                .then(({ data }: AxiosResponse<IAxiosRegistration>) => {
-                    const { continueWork } = data;
-                    if (continueWork) {
-                        return data;
-                    }
-                })
-                .catch(e => console.log(e));
-        } catch (error) {
-            console.log(error);
-        }
+        return await axios
+            .post('http://localhost:8080/auth/save-user', {
+                userName,
+                email,
+                password,
+                confirmPassword,
+            })
+            .then(({ data }: AxiosResponse<IAxiosRegistration>) => {
+                const { continueWork } = data;
+                if (continueWork) {
+                    return data;
+                }
+            })
+            .catch(data => rejectWithValue(data.response.data.message));
     }
 );
 
@@ -35,7 +31,6 @@ export const loginThunk = createAsyncThunk(
     'auth/login-user',
     async (state: any, { rejectWithValue }) => {
         const { email, password } = state;
-        console.log(email, password);
         return await axios
             .post('http://localhost:8080/auth/login-user', {
                 email: email,
@@ -47,8 +42,6 @@ export const loginThunk = createAsyncThunk(
                     return data;
                 }
             })
-            .catch(data => {
-                return rejectWithValue(data.response.data.message);
-            });
+            .catch(data => rejectWithValue(data.response.data.message));
     }
 );

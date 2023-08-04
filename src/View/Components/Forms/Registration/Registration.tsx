@@ -11,14 +11,16 @@ import { auth } from '../../../../app/auth/selectors';
 import { IInputForm } from '../types';
 import Button from '../../Button';
 import { EButtonSize, EButtonPosition } from '../../Button/Button';
+import StatusMessage from '../StatusMessage/StatusMessage';
+import { validateEmail, validateName, validatePassword, validateSimilarityPass } from '../validate';
 
 interface IFormProps {}
 
 const Registration: FC<IFormProps> = props => {
-    const userName = useInput('aaaa');
-    const email = useInput('bbb@mail.ru');
-    const password = useInput('qwe123!');
-    const confirmPassword = useInput('qwe123!');
+    const userName = useInput('aaaa', validateName);
+    const email = useInput('bbb@mail.ru', validateEmail);
+    const password = useInput('qwe123!', validatePassword);
+    const confirmPassword = useInput('qwe123!',validateSimilarityPass(password.value));
 
     const dispatch = useAppDispatch();
     const { message, continueWork } = useAppSelector(auth);
@@ -53,26 +55,22 @@ const Registration: FC<IFormProps> = props => {
         },
     ];
 
+    const statusMessage = message ? (
+        <StatusMessage continueWork={continueWork} message={message} />
+    ) : null;
+
     return (
         <Form
             className={css.regForm}
-            action="/auth"
+            action="/auth/reg"
             method="post"
             onSubmit={handleSubmit}
         >
             <h3 className={css.regForm__title}>Registration</h3>
-
-            {message && continueWork ? (
-                <div className={css.success}>{message}</div>
-            ) : null}
-            {message && !continueWork ? (
-                <div className={css.error}>{message}</div>
-            ) : null}
-
+            {statusMessage}
             {inputsReg.map(el => (
                 <Input key={el.name} {...el} />
             ))}
-
             <Button
                 type="submit"
                 size={EButtonSize.MEDIUM}
@@ -80,8 +78,7 @@ const Registration: FC<IFormProps> = props => {
             >
                 Sign up
             </Button>
-
-            <p>
+            <p className={css.question}>
                 Have an account? <Link to="/auth">Log in now</Link>
             </p>
         </Form>

@@ -1,6 +1,7 @@
 import css from './Button.module.scss';
 
 import { ButtonHTMLAttributes, FC } from 'react';
+
 // sizes for button in css
 export enum EButtonSize {
     SMALL = 's',

@@ -1,4 +1,6 @@
 import { Outlet } from 'react-router-dom';
+// import ProgressBar from './View/Components/Loader/Loader';
+
 import NavBar from './View/Components/NavigationBar/NavBar';
 
 function App() {
@@ -6,6 +8,7 @@ function App() {
         <div className="App">
             <NavBar />
             <Outlet />
+            {/* <ProgressBar /> */}
         </div>
     );
 }
