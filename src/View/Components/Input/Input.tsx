@@ -18,7 +18,6 @@ const Input: FC<IInputForm> = ({
                 value={value}
                 onChange={handleChange}
                 onBlur={handleFocus}
-                // onFocus={handleFocus}
                 placeholder={placeholder}
             />
             <div className={error ? css.error : `${css.error} ${css.hidden}`}>

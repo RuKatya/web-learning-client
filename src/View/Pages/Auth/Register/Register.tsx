@@ -3,8 +3,6 @@
 import { FormEvent } from 'react';
 import { clearErrorMessage, thunk } from '../../../../app/auth/authReducer';
 import { useAppDispatch } from '../../../../app/hooks';
-import useInput from '../../../../hooks/useInput';
-import MyForm from '../../../Components/Forms/Form/Form';
 import { IInputForm } from '../../../Components/Forms/types';
 import {
     validateEmail,
@@ -12,6 +10,9 @@ import {
     validatePassword,
     validateSimilarityPass,
 } from '../../../Components/Forms/validate';
+
+import useInput from '../../../../hooks/useInput';
+import MyForm from '../../../Components/Forms/Form/Form';
 
 const Register = () => {
     const userName = useInput('aaaa', validateName);
@@ -68,7 +69,7 @@ const Register = () => {
             question="Have an account?"
         ></MyForm>
     );
-    // return <LoginForm />;
+    // return <RegistrationForm />;
 };
 
 export default Register;

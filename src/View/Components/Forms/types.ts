@@ -16,5 +16,4 @@ export interface IInputForm extends InputHTMLAttributes<HTMLInputElement> {
     error: string;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
     handleFocus: (e: FocusEvent<HTMLInputElement>) => void;
-    // handleBlur: (e: any) => void;
 }

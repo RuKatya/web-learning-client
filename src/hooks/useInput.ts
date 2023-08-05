@@ -23,7 +23,6 @@ const useInput = (
         error,
         handleFocus,
         handleChange,
-        // handleBlur
     };
 };
 
