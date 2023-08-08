@@ -45,6 +45,7 @@ const MyForm: FC<IFormProps> = ({
         if (isLogin) {
             navigate(navigateTo);
         }
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -81,12 +82,16 @@ const MyForm: FC<IFormProps> = ({
                 size={EButtonSize.MEDIUM}
                 position={EButtonPosition.CENTER}
                 disabled={status === 'loading'}
+                style={{ marginBottom: 10 }}
             >
                 {buttonText}
             </Button>
-            <p className={css.question}>
-                <span>{question}</span> <Link to={linkToBtn}>{buttonText}</Link>
-            </p>
+            {!isLogin && (
+                <p className={css.question}>
+                    <span>{question}</span>{' '}
+                    <Link to={linkToBtn}>{buttonText}</Link>
+                </p>
+            )}
         </Form>
     );
 };

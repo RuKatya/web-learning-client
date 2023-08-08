@@ -20,9 +20,18 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     style?: object;
 }
 
-const Button: FC<IButtonProps> = ({ size, children, position }) => {
+const Button: FC<IButtonProps> = ({
+    size = EButtonSize.SMALL,
+    children,
+    position,
+    style = {},
+}) => {
     const classes = `${css.button} ${css[size]} ${css[position]}`;
 
-    return <button className={classes}>Button {children}</button>;
+    return (
+        <button style={style} className={classes}>
+            {children}
+        </button>
+    );
 };
 export default Button;
