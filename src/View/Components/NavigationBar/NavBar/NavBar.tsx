@@ -1,4 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { logout } from '../../../../app/auth/authReducer';
+import { useAppDispatch } from '../../../../app/hooks';
+import { authUser } from '../../../../app/auth/selectors';
+import { useAppSelector } from '../../../../app/hooks';
 
 // interface Links {
 //     url: string
@@ -12,14 +16,26 @@ import { NavLink } from "react-router-dom";
 // ]
 
 const NavBar = () => {
+    const dispatch = useAppDispatch();
+    const { isLogin } = useAppSelector(authUser);
+    const handleLogout = () => {
+        dispatch(logout());
+    };
+
     return (
         <div>
-            <NavLink to="/auth">Sign In</NavLink>
+            {!isLogin ? (
+                <NavLink to="/auth">Sign In</NavLink>
+            ) : (
+                <NavLink onClick={handleLogout} to="/auth">
+                    Log Out
+                </NavLink>
+            )}
             {/* {linksForUser.map(link => (
                 <NavLink to={link.url}>{link.title}</NavLink>
             ))} */}
         </div>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

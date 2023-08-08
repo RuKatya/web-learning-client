@@ -1,9 +1,14 @@
-import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import App from "../App";
-import HomePage from "../View/Pages/HomePage/HomePage";
-import Auth from "../View/Pages/Auth/Auth";
-import Login from "../View/Pages/Auth/Login/Login";
-import Register from "../View/Pages/Auth/Register/Register";
+import {
+    RouterProvider,
+    Route,
+    createBrowserRouter,
+    createRoutesFromElements,
+} from 'react-router-dom';
+import App from '../App';
+import HomePage from '../View/Pages/HomePage/HomePage';
+import Auth from '../View/Pages/Auth/Auth';
+import Login from '../View/Pages/Auth/Login/Login';
+import Register from '../View/Pages/Auth/Register/Register';
 
 const RouterPage = () => {
     const router = createBrowserRouter(
@@ -12,13 +17,13 @@ const RouterPage = () => {
                 <Route index element={<HomePage />} />
                 <Route path="auth" element={<Auth />}>
                     <Route index element={<Login />} />
-                    <Route path="registretion" element={<Register />} />
+                    <Route path="reg" element={<Register />} />
                 </Route>
             </Route>
         )
-    )
+    );
 
-    return <RouterProvider router={router} />
-}
+    return <RouterProvider router={router} />;
+};
 
-export default RouterPage
+export default RouterPage;
