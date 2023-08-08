@@ -1,0 +1,22 @@
+.button {
+    display: block;
+    border-radius: 4px;
+    &.s {
+        height: 30px;
+        width: 70px;
+    }
+    &.m {
+        height: 40px;
+        width: 90px;
+    }
+    &.l {
+        height: 50px;
+        width: 110px;
+    }
+    &.right {
+        margin-left: auto;
+    }
+    &.center {
+        margin: 0 auto;
+    }
+}
