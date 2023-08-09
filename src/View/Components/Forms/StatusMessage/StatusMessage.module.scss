@@ -1,6 +1,8 @@
 .success,
 .error {
-    margin-bottom: 10px;
+    min-height: 15px;
+    margin-bottom: 4px;
+    margin-top: 4px;
 }
 .error {
     color: red;

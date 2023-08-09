@@ -9,24 +9,29 @@ interface ILoaderProps {
     borderWidth: number;
     borderColor: string;
     barStyle: object;
-    wrapperStyle: object;
+    wrapperStyles: object;
+    wrapperColor: string;
+    wrapperWidth: number;
 }
 
 const ProgressBar: FC<Partial<ILoaderProps>> = ({
     width,
     height,
-    wrapperStyle,
+    wrapperStyles,
     barColor,
     barStyle,
     borderWidth,
+    wrapperColor,
     borderColor,
+    wrapperWidth,
 }) => {
     return (
         <div
             style={{
-                ...wrapperStyle,
+                ...wrapperStyles,
                 width,
                 height,
+                boxShadow: `0 0 0px ${wrapperWidth}px ${wrapperColor}`,
                 borderColor: `${borderWidth} solid ${borderColor}`,
             }}
             className={css.loaderWrapper}

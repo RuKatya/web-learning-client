@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom';
-// import ProgressBar from './View/Components/Loader/Loader';
 
 import NavBar from './View/Components/NavigationBar/NavBar';
+
+// MAYBE NEED NEW REGEX FOR 1.) EN LANG  2.) EMAIL
 
 function App() {
     return (
         <div className="App">
             <NavBar />
             <Outlet />
-            {/* <ProgressBar /> */}
         </div>
     );
 }

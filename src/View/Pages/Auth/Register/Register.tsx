@@ -1,8 +1,3 @@
-// import { Registration as RegistrationForm } from '../../../Components/Forms';
-
-import { FormEvent } from 'react';
-import { clearErrorMessage, thunk } from '../../../../app/auth/authReducer';
-import { useAppDispatch } from '../../../../app/hooks';
 import { IInputForm } from '../../../Components/Forms/types';
 import {
     validateEmail,
@@ -12,7 +7,10 @@ import {
 } from '../../../Components/Forms/validate';
 
 import useInput from '../../../../hooks/useInput';
-import MyForm from '../../../Components/Forms/Form/Form';
+import AuthForm from '../../../Components/Forms/AuthForm';
+import useAsyncSubmit, {
+    DispatchTypesE,
+} from '../../../../hooks/useAsyncSubmit';
 
 const Register = () => {
     const userName = useInput('aaaa', validateName);
@@ -22,54 +20,44 @@ const Register = () => {
         'qwe123!',
         validateSimilarityPass(password.value)
     );
-
-    const dispatch = useAppDispatch();
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        dispatch(
-            thunk.regThunk({
-                email: email.value,
-                password: password.value,
-                userName: userName.value,
-                confirmPassword: confirmPassword.value,
-            })
-        );
-        dispatch(clearErrorMessage());
-    };
+    const { handleSubmit } = useAsyncSubmit(DispatchTypesE.REG, {
+        userName: userName.value,
+        email: email.value,
+        password: password.value,
+        confirmPassword: confirmPassword.value,
+    });
 
     const inputsReg: IInputForm[] = [
-        { ...userName, name: 'name', placeholder: 'Type name...' },
+        { ...userName, name: 'userName', placeholder: 'Type name...' },
         { ...email, name: 'email', placeholder: 'Type email...' },
         {
             ...password,
             type: 'password',
             name: 'password',
+
             placeholder: 'Type password...',
         },
         {
             ...confirmPassword,
+            name: 'confirmPassword',
+
             type: 'password',
-            name: 'retryPassword',
-            placeholder: 'Retry password...',
+            placeholder: 'Confirm password...',
         },
     ];
 
     return (
-        <MyForm
-            method="post"
+        <AuthForm
             formAction="auth"
             linkToBtn="/auth"
-            navigateTo="/auth"
             inputs={inputsReg}
             title="Registration"
-            buttonText="Log in now"
+            buttonText="Sign Up"
             handleSubmit={handleSubmit}
             question="Have an account?"
-        ></MyForm>
+            questionLinkText="Login now"
+        />
     );
-    // return <RegistrationForm />;
 };
 
 export default Register;

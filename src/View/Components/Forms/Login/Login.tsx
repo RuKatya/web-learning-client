@@ -2,7 +2,7 @@ import css from './LoginForm.module.scss';
 
 import { FC, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { clearErrorMessage, thunk } from '../../../../app/auth/authReducer';
+import { thunk } from '../../../../app/auth/authReducer';
 import { auth } from '../../../../app/auth/selectors';
 
 import Input from '../../Input';
@@ -37,10 +37,10 @@ const Login: FC<IFormProps> = props => {
     }, []);
 
     useEffect(() => {
-        let timerId: any;
+        let timerId: ReturnType<typeof setTimeout>;
         if (continueWork) {
             timerId = setTimeout(() => {
-                dispatch(clearErrorMessage());
+                // dispatch(clearErrorMessage());
                 navigate('/');
             }, 3000);
         }

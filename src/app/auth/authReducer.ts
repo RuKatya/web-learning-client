@@ -19,8 +19,9 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        clearErrorMessage(state) {
+        clearMessageContinueWork(state) {
             state.message = '';
+            state.continueWork = false;
         },
         logout(state) {
             state.continueWork = false;
@@ -44,8 +45,9 @@ const authSlice = createSlice({
                     state.continueWork = continueWork;
                 }
             )
-            .addCase(regThunk.rejected, state => {
+            .addCase(regThunk.rejected, (state, { payload }: any) => {
                 state.status = 'failed';
+                state.message = payload;
             })
             .addCase(loginThunk.pending, state => {
                 state.status = 'loading';
@@ -54,12 +56,9 @@ const authSlice = createSlice({
                 loginThunk.fulfilled,
                 (
                     state,
-                    {
-                        payload: { message, continueWork, userRole, userName },
-                    }: any
+                    { payload: { continueWork, userRole, userName } }: any
                 ) => {
                     state.status = 'idle';
-                    state.message = message;
                     state.continueWork = continueWork;
                     state.user = {
                         isLogin: true,
@@ -75,7 +74,7 @@ const authSlice = createSlice({
     },
 });
 
-export const { clearErrorMessage, logout } = authSlice.actions;
+export const { clearMessageContinueWork, logout } = authSlice.actions;
 export const thunk = { regThunk, loginThunk };
 
 export default authSlice.reducer;

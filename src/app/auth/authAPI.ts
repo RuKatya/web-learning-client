@@ -5,13 +5,23 @@ import {
     IAxiosRegistration,
 } from '../../View/Components/Forms/types';
 
+const HOST = 'http://localhost:8080';
+
+enum RoutesE {
+    SAVE_USER = '/auth/save-user',
+    LOGIN_USER = '/auth/login-user',
+}
+
+export interface IRegAsyncThunk {
+    [key: string]: string;
+}
+
 export const regThunk = createAsyncThunk(
     'auth/save-user',
     async (state: any, { rejectWithValue }) => {
         const { userName, email, password, confirmPassword } = state;
-
         return await axios
-            .post('http://localhost:8080/auth/save-user', {
+            .post(`${HOST}${RoutesE.SAVE_USER}`, {
                 userName,
                 email,
                 password,
@@ -32,14 +42,14 @@ export const loginThunk = createAsyncThunk(
     async (state: any, { rejectWithValue }) => {
         const { email, password } = state;
         return await axios
-            .post('http://localhost:8080/auth/login-user', {
-                email: email,
-                password: password,
+            .post(`${HOST}${RoutesE.LOGIN_USER}`, {
+                email,
+                password,
             })
             .then(({ data }: AxiosResponse<IAxiosLogin>) => {
                 const { continueWork } = data;
                 if (continueWork) {
-                    return data;
+                    return data as IAxiosLogin;
                 }
             })
             .catch(data => rejectWithValue(data.response.data.message));

@@ -1,9 +1,4 @@
-// import { Login as LoginForm } from '../../../Components/Forms';
-
-import { FormEvent } from 'react';
 import { IInputForm } from '../../../Components/Forms/types';
-import { clearErrorMessage, thunk } from '../../../../app/auth/authReducer';
-import { useAppDispatch } from '../../../../app/hooks';
 
 import {
     validateEmail,
@@ -11,21 +6,16 @@ import {
 } from '../../../Components/Forms/validate';
 
 import useInput from '../../../../hooks/useInput';
-import MyForm from '../../../Components/Forms/Form/Form';
+import AuthForm from '../../../Components/Forms/AuthForm/AuthForm';
+import useSubmit, { DispatchTypesE } from '../../../../hooks/useAsyncSubmit';
 
 const Login = () => {
     const email = useInput('qwe123@mail.ruww', validateEmail);
     const password = useInput('qwe123!', validatePassword);
-    const dispatch = useAppDispatch();
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        dispatch(
-            thunk.loginThunk({ email: email.value, password: password.value })
-        );
-        dispatch(clearErrorMessage());
-    };
+    const { handleSubmit } = useSubmit(DispatchTypesE.LOGIN, {
+        email: email.value,
+        password: password.value,
+    });
 
     const inputsLogin: IInputForm[] = [
         {
@@ -35,26 +25,24 @@ const Login = () => {
         },
         {
             ...password,
-            type: 'password',
             name: 'password',
+            type: 'password',
             placeholder: 'Type password...',
         },
     ];
 
     return (
-        <MyForm
-            method="post"
+        <AuthForm
             title="Log In"
-            navigateTo="/"
             linkToBtn="reg"
             formAction="auth"
-            buttonText="Sign Up"
+            buttonText="Sign In"
             inputs={inputsLogin}
             handleSubmit={handleSubmit}
             question="Dont't have an account"
+            questionLinkText="Sign Up"
         />
     );
-    // return <LoginForm />;
 };
 
 export default Login;
