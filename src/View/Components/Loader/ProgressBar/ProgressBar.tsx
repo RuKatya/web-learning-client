@@ -1,20 +1,10 @@
-import css from './Loader.module.scss';
+import css from './ProgressBar.module.scss';
 
 import { FC } from 'react';
 
-interface ILoaderProps {
-    width: number | string;
-    height: number | string;
-    barColor: string;
-    borderWidth: number;
-    borderColor: string;
-    barStyle: object;
-    wrapperStyles: object;
-    wrapperColor: string;
-    wrapperWidth: number;
-}
+import { ILoaderProps1 } from '../types';
 
-const ProgressBar: FC<Partial<ILoaderProps>> = ({
+const ProgressBar: FC<Partial<ILoaderProps1>> = ({
     width,
     height,
     wrapperStyles,

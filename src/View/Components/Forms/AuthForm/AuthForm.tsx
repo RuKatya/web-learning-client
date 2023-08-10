@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import Input from '../../Input';
 import Button from '../../Button';
 import StatusMessage from '../StatusMessage/StatusMessage';
-import ProgressBar from '../../Loader/Loader';
 import { clearMessageContinueWork } from '../../../../app/auth/authReducer';
 import { IInputForm } from '../types';
 
@@ -53,19 +52,6 @@ const AuthForm: FC<IAuthFormProps> = ({
         // eslint-disable-next-line
     }, [continueWork]);
 
-    const loader =
-        status === 'loading' ? (
-            <ProgressBar
-                width={60}
-                height={20}
-                barColor="blue"
-                wrapperColor="black"
-                wrapperWidth={2}
-            />
-        ) : (
-            <StatusMessage continueWork={continueWork} message={message} />
-        );
-
     return (
         <Form
             className={css.loginForm}
@@ -74,17 +60,22 @@ const AuthForm: FC<IAuthFormProps> = ({
             onSubmit={handleSubmit}
         >
             <h3 className={css.loginForm__title}>{title}</h3>
-            {loader}
+
+            <StatusMessage continueWork={continueWork} message={message} />
 
             {inputs.map(el => (
                 <Input key={el.name} {...el} />
             ))}
 
             <Button
+                isLoading={status === 'loading'}
+                spinnerWidth={20}
+                spinnerHeight={20}
+                borderColor="green"
+                borderWidth={2}
                 type="submit"
                 size={EButtonSize.MEDIUM}
                 position={EButtonPosition.CENTER}
-                // disabled={status === 'loading'}
                 style={{ marginBottom: 10 }}
             >
                 {buttonText}

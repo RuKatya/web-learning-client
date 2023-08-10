@@ -4,21 +4,21 @@ import {
     IAxiosLogin,
     IAxiosRegistration,
 } from '../../View/Components/Forms/types';
+import { RoutesE } from './types';
+
+import { ILoginAsyncThunk, IRegAsyncThunk } from '../../hooks/useAsyncSubmit';
 
 const HOST = 'http://localhost:8080';
 
-enum RoutesE {
-    SAVE_USER = '/auth/save-user',
-    LOGIN_USER = '/auth/login-user',
-}
-
-export interface IRegAsyncThunk {
-    [key: string]: string;
-}
-
-export const regThunk = createAsyncThunk(
+export const regThunk = createAsyncThunk<
+    AxiosResponse<IAxiosRegistration>,
+    IRegAsyncThunk,
+    { rejectValue: string }
+>(
     'auth/save-user',
-    async (state: any, { rejectWithValue }) => {
+
+    async (state, { rejectWithValue }) => {
+        console.log('state', state);
         const { userName, email, password, confirmPassword } = state;
         return await axios
             .post(`${HOST}${RoutesE.SAVE_USER}`, {
@@ -27,31 +27,36 @@ export const regThunk = createAsyncThunk(
                 password,
                 confirmPassword,
             })
-            .then(({ data }: AxiosResponse<IAxiosRegistration>) => {
+            .then(({ data }) => {
                 const { continueWork } = data;
-                if (continueWork) {
-                    return data;
-                }
+                if (continueWork) return data;
             })
-            .catch(data => rejectWithValue(data.response.data.message));
+            .catch(data => {
+                const message = data.response.data.message as string;
+                return rejectWithValue(message);
+            });
     }
 );
 
-export const loginThunk = createAsyncThunk(
-    'auth/login-user',
-    async (state: any, { rejectWithValue }) => {
-        const { email, password } = state;
-        return await axios
-            .post(`${HOST}${RoutesE.LOGIN_USER}`, {
-                email,
-                password,
-            })
-            .then(({ data }: AxiosResponse<IAxiosLogin>) => {
-                const { continueWork } = data;
-                if (continueWork) {
-                    return data as IAxiosLogin;
-                }
-            })
-            .catch(data => rejectWithValue(data.response.data.message));
-    }
-);
+export const loginThunk = createAsyncThunk<
+    AxiosResponse<IAxiosLogin>,
+    ILoginAsyncThunk,
+    { rejectValue: string }
+>('auth/login-user', async (state, { rejectWithValue }) => {
+    console.log('state', state);
+
+    const { email, password } = state;
+    return await axios
+        .post(`${HOST}${RoutesE.LOGIN_USER}`, {
+            email,
+            password,
+        })
+        .then(({ data }) => {
+            const { continueWork } = data;
+            if (continueWork) return data;
+        })
+        .catch(data => {
+            const message = data.response.data.message;
+            return rejectWithValue(message);
+        });
+});

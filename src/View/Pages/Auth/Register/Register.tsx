@@ -10,6 +10,7 @@ import useInput from '../../../../hooks/useInput';
 import AuthForm from '../../../Components/Forms/AuthForm';
 import useAsyncSubmit, {
     DispatchTypesE,
+    IRegAsyncThunk,
 } from '../../../../hooks/useAsyncSubmit';
 
 const Register = () => {
@@ -25,7 +26,7 @@ const Register = () => {
         email: email.value,
         password: password.value,
         confirmPassword: confirmPassword.value,
-    });
+    } as IRegAsyncThunk);
 
     const inputsReg: IInputForm[] = [
         { ...userName, name: 'userName', placeholder: 'Type name...' },

@@ -9,7 +9,7 @@ interface IStatusMessageProps {
 
 const StatusMessage: FC<IStatusMessageProps> = ({
     continueWork = false,
-    message,
+    message = '',
 }) => {
     return <p className={continueWork ? css.success : css.error}>{message}</p>;
 };

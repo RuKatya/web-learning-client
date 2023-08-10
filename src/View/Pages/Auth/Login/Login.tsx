@@ -7,15 +7,17 @@ import {
 
 import useInput from '../../../../hooks/useInput';
 import AuthForm from '../../../Components/Forms/AuthForm/AuthForm';
-import useSubmit, { DispatchTypesE } from '../../../../hooks/useAsyncSubmit';
+import useAsyncSubmit, {
+    DispatchTypesE, ILoginAsyncThunk,
+} from '../../../../hooks/useAsyncSubmit';
 
 const Login = () => {
     const email = useInput('qwe123@mail.ruww', validateEmail);
     const password = useInput('qwe123!', validatePassword);
-    const { handleSubmit } = useSubmit(DispatchTypesE.LOGIN, {
+    const { handleSubmit } = useAsyncSubmit(DispatchTypesE.LOGIN, {
         email: email.value,
         password: password.value,
-    });
+    } as ILoginAsyncThunk);
 
     const inputsLogin: IInputForm[] = [
         {

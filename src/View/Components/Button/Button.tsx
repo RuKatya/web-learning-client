@@ -1,6 +1,7 @@
 import css from './Button.module.scss';
 
 import { ButtonHTMLAttributes, FC } from 'react';
+import { Spinner } from '../Loader';
 
 // sizes for button in css
 export enum EButtonSize {
@@ -18,6 +19,11 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: string;
     position: EButtonPosition;
     style?: object;
+    isLoading?: boolean;
+    spinnerWidth?: number;
+    spinnerHeight?: number;
+    borderColor?: string;
+    borderWidth?: number;
 }
 
 const Button: FC<IButtonProps> = ({
@@ -25,12 +31,19 @@ const Button: FC<IButtonProps> = ({
     children,
     position,
     style = {},
+    isLoading = false,
+    spinnerWidth,
+    spinnerHeight,
 }) => {
     const classes = `${css.button} ${css[size]} ${css[position]}`;
 
     return (
-        <button style={style} className={classes}>
-            {children}
+        <button disabled={isLoading} style={style} className={classes}>
+            {isLoading ? (
+                <Spinner width={spinnerWidth} height={spinnerHeight} />
+            ) : (
+                children
+            )}
         </button>
     );
 };

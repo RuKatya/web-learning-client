@@ -13,3 +13,8 @@ export interface IAuthState {
     status: StatusT;
     continueWork: boolean;
 }
+
+export enum RoutesE {
+    SAVE_USER = '/auth/save-user',
+    LOGIN_USER = '/auth/login-user',
+}

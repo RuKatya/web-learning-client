@@ -5,9 +5,13 @@ import { useAppDispatch } from '../app/hooks';
 export interface IUseAsyncSubmitReturn {
     handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
-
-export interface IUseAsyncSubmit {
-    [key: string]: string;
+export interface ILoginAsyncThunk {
+    email: string;
+    password: string;
+}
+export interface IRegAsyncThunk extends ILoginAsyncThunk {
+    userName: string;
+    confirmPassword: string;
 }
 
 export enum DispatchTypesE {
@@ -17,7 +21,7 @@ export enum DispatchTypesE {
 
 const useAsyncSubmit = (
     dispatchType: DispatchTypesE,
-    rest: IUseAsyncSubmit
+    rest: IRegAsyncThunk | ILoginAsyncThunk
 ): IUseAsyncSubmitReturn => {
     const dispatch = useAppDispatch();
 
@@ -26,10 +30,10 @@ const useAsyncSubmit = (
 
         switch (dispatchType) {
             case DispatchTypesE.REG:
-                dispatch(thunk.regThunk(rest));
+                dispatch(thunk.regThunk(rest as IRegAsyncThunk));
                 break;
             case DispatchTypesE.LOGIN:
-                dispatch(thunk.loginThunk(rest));
+                dispatch(thunk.loginThunk(rest as ILoginAsyncThunk));
                 break;
             default:
                 break;

@@ -1,8 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IAuthState } from './types';
+import { IAuthState, StatusT } from './types';
 
 import { regThunk, loginThunk } from './authAPI';
+import { ILoginAsyncThunk, IRegAsyncThunk } from '../../hooks/useAsyncSubmit';
+import { IAxiosRegistration } from '../../View/Components/Forms/types';
+import { AsyncThunkFulfilledActionCreator } from '@reduxjs/toolkit/dist/createAsyncThunk';
 
 const initialState = {
     user: {
@@ -40,9 +43,11 @@ const authSlice = createSlice({
             .addCase(
                 regThunk.fulfilled,
                 (state, { payload: { message, continueWork } }: any) => {
-                    state.status = 'idle';
-                    state.message = message;
-                    state.continueWork = continueWork;
+                    if (message && continueWork) {
+                        state.status = 'idle';
+                        state.message = message;
+                        state.continueWork = continueWork;
+                    }
                 }
             )
             .addCase(regThunk.rejected, (state, { payload }: any) => {
@@ -67,9 +72,11 @@ const authSlice = createSlice({
                     };
                 }
             )
-            .addCase(loginThunk.rejected, (state, { payload }: any) => {
-                state.status = 'failed';
-                state.message = payload;
+            .addCase(loginThunk.rejected, (state, { payload }) => {
+                if (payload) {
+                    state.status = 'failed';
+                    state.message = payload;
+                }
             });
     },
 });
