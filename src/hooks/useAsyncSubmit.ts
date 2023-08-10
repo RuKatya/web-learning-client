@@ -19,9 +19,9 @@ export enum DispatchTypesE {
     LOGIN = 'login',
 }
 
-const useAsyncSubmit = (
+const useAsyncSubmit = <T>(
     dispatchType: DispatchTypesE,
-    rest: IRegAsyncThunk | ILoginAsyncThunk
+    rest: T
 ): IUseAsyncSubmitReturn => {
     const dispatch = useAppDispatch();
 
@@ -30,10 +30,10 @@ const useAsyncSubmit = (
 
         switch (dispatchType) {
             case DispatchTypesE.REG:
-                dispatch(thunk.regThunk(rest as IRegAsyncThunk));
+                dispatch(thunk.regThunk(rest as unknown as IRegAsyncThunk));
                 break;
             case DispatchTypesE.LOGIN:
-                dispatch(thunk.loginThunk(rest as ILoginAsyncThunk));
+                dispatch(thunk.loginThunk(rest as unknown as ILoginAsyncThunk));
                 break;
             default:
                 break;

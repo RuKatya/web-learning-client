@@ -68,15 +68,15 @@ const AuthForm: FC<IAuthFormProps> = ({
             ))}
 
             <Button
-                isLoading={status === 'loading'}
-                spinnerWidth={20}
-                spinnerHeight={20}
-                borderColor="green"
-                borderWidth={2}
                 type="submit"
+                borderWidth={2}
+                borderColor="green"
                 size={EButtonSize.MEDIUM}
                 position={EButtonPosition.CENTER}
                 style={{ marginBottom: 10 }}
+                spinnerWidth={20}
+                spinnerHeight={20}
+                isLoading={status === 'loading'}
             >
                 {buttonText}
             </Button>

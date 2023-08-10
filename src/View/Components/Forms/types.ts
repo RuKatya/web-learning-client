@@ -1,7 +1,7 @@
 import { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react';
 
 export interface IAxiosRegistration {
-    messsage: string;
+    message: string;
     continueWork: boolean;
 }
 

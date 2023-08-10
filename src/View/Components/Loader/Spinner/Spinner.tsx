@@ -3,7 +3,7 @@ import css from './Spinner.module.scss';
 import { FC } from 'react';
 import { ILoaderProps1 } from '../types';
 
-// PARTIAL MYBE NO NEED
+// PARTIAL MAYBE NO NEED
 const Spinner: FC<Partial<ILoaderProps1>> = ({
     width,
     height,

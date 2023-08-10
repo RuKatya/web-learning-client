@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IAuthState, StatusT } from './types';
+import { IAuthState } from './types';
 
 import { regThunk, loginThunk } from './authAPI';
-import { ILoginAsyncThunk, IRegAsyncThunk } from '../../hooks/useAsyncSubmit';
-import { IAxiosRegistration } from '../../View/Components/Forms/types';
-import { AsyncThunkFulfilledActionCreator } from '@reduxjs/toolkit/dist/createAsyncThunk';
+// import { ILoginAsyncThunk, IRegAsyncThunk } from '../../hooks/useAsyncSubmit';
+// import { IAxiosRegistration } from '../../View/Components/Forms/types';
+// import { AsyncThunkFulfilledActionCreator } from '@reduxjs/toolkit/dist/createAsyncThunk';
 
 const initialState = {
     user: {
@@ -42,7 +42,7 @@ const authSlice = createSlice({
             })
             .addCase(
                 regThunk.fulfilled,
-                (state, { payload: { message, continueWork } }: any) => {
+                (state, { payload: { message, continueWork } }) => {
                     if (message && continueWork) {
                         state.status = 'idle';
                         state.message = message;
@@ -50,9 +50,11 @@ const authSlice = createSlice({
                     }
                 }
             )
-            .addCase(regThunk.rejected, (state, { payload }: any) => {
+            .addCase(regThunk.rejected, (state, { payload }) => {
                 state.status = 'failed';
-                state.message = payload;
+                if (payload) {
+                    state.message = payload;
+                }
             })
             .addCase(loginThunk.pending, state => {
                 state.status = 'loading';

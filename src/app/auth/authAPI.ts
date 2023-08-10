@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import {
     IAxiosLogin,
     IAxiosRegistration,
@@ -11,35 +12,33 @@ import { ILoginAsyncThunk, IRegAsyncThunk } from '../../hooks/useAsyncSubmit';
 const HOST = 'http://localhost:8080';
 
 export const regThunk = createAsyncThunk<
-    AxiosResponse<IAxiosRegistration>,
+    IAxiosRegistration,
     IRegAsyncThunk,
     { rejectValue: string }
->(
-    'auth/save-user',
-
-    async (state, { rejectWithValue }) => {
-        console.log('state', state);
-        const { userName, email, password, confirmPassword } = state;
-        return await axios
-            .post(`${HOST}${RoutesE.SAVE_USER}`, {
-                userName,
-                email,
-                password,
-                confirmPassword,
-            })
-            .then(({ data }) => {
-                const { continueWork } = data;
-                if (continueWork) return data;
-            })
-            .catch(data => {
-                const message = data.response.data.message as string;
+>('auth/save-user', async (state, { rejectWithValue }) => {
+    console.log('state', state);
+    const { userName, email, password, confirmPassword } = state;
+    return await axios
+        .post(`${HOST}${RoutesE.SAVE_USER}`, {
+            userName,
+            email,
+            password,
+            confirmPassword,
+        })
+        .then(({ data }) => {
+            const { continueWork } = data;
+            if (continueWork) return data;
+        })
+        .catch(data => {
+            const message = data.response.data.message;
+            if (message) {
                 return rejectWithValue(message);
-            });
-    }
-);
+            }
+        });
+});
 
 export const loginThunk = createAsyncThunk<
-    AxiosResponse<IAxiosLogin>,
+    IAxiosLogin,
     ILoginAsyncThunk,
     { rejectValue: string }
 >('auth/login-user', async (state, { rejectWithValue }) => {
@@ -56,7 +55,7 @@ export const loginThunk = createAsyncThunk<
             if (continueWork) return data;
         })
         .catch(data => {
-            const message = data.response.data.message;
+            const message = data.response.data.message as string;
             return rejectWithValue(message);
         });
 });

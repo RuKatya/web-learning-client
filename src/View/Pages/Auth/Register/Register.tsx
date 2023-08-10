@@ -21,12 +21,15 @@ const Register = () => {
         'qwe123!',
         validateSimilarityPass(password.value)
     );
-    const { handleSubmit } = useAsyncSubmit(DispatchTypesE.REG, {
-        userName: userName.value,
-        email: email.value,
-        password: password.value,
-        confirmPassword: confirmPassword.value,
-    } as IRegAsyncThunk);
+    const { handleSubmit } = useAsyncSubmit<IRegAsyncThunk>(
+        DispatchTypesE.REG,
+        {
+            userName: userName.value,
+            email: email.value,
+            password: password.value,
+            confirmPassword: confirmPassword.value,
+        } as IRegAsyncThunk
+    );
 
     const inputsReg: IInputForm[] = [
         { ...userName, name: 'userName', placeholder: 'Type name...' },
