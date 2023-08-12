@@ -1,0 +1,49 @@
+.tooltip {
+    position: absolute;
+    z-index: 1;
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 8px;
+    // border: 1px solid black;
+    background-color: #e5e5e5;
+    transition: opacity 0.3s ease-in-out;
+
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    &.active {
+        opacity: 1;
+    }
+    &.top {
+        // left: 50%;
+        // transform: translate();
+    }
+    &.right {
+        // left: 50%;
+        // transform: translate();
+    }
+    &.bottom {
+        left: 50%;
+        top: 130%;
+        transform: translateX(-50%);
+    }
+    &.left {
+        // left: 50%;
+        // transform: translate();
+    }
+
+    .tooltipText {
+    }
+    &::before {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: '';
+        border: 10px solid transparent; /* Прозрачные границы */
+        border-bottom: 10px solid #e5e5e5; /* Добавляем треугольник */
+    }
+}

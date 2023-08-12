@@ -7,9 +7,7 @@ const regexpSpace = new RegExp(/\s/g);
 const regexpNumber = new RegExp(/\d/g);
 const regexpLetter = new RegExp(/[a-zA-Z]/g);
 const regexpSpecChar = new RegExp(/[!@#$%^&*]/g);
-// const regexpEn = new RegExp(/^[a-zA-Z0-9e!@#$%^&*]+$/g);
 const regexpEn = new RegExp(/[^a-zA-Z0-9!@#$%^&*]/g);
-// const regexpEn = new RegExp(/[^a-zA-Z0-9]/g);
 
 export const validateName = (name: string) => {
     if (!name) {

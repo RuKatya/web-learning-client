@@ -12,6 +12,11 @@
     box-sizing: border-box;
 }
 
+ul,
+ol {
+    text-align: left;
+    list-style: none;
+}
 // button {
 //     border: none;
 //     background-color: transparent;
