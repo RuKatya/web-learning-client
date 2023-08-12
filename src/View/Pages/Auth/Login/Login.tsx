@@ -13,8 +13,8 @@ import useAsyncSubmit, {
 } from '../../../../hooks/useAsyncSubmit';
 
 const Login = () => {
-    const email = useInput('qwe123@mail.ruww', validateEmail);
-    const password = useInput('qwe123!', validatePassword);
+    const email = useInput('', validateEmail);
+    const password = useInput('', validatePassword);
     const { handleSubmit } = useAsyncSubmit<ILoginAsyncThunk>(
         DispatchTypesE.LOGIN,
         {

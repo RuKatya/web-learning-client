@@ -2,15 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { IAuthState } from './types';
 
-import { regThunk, loginThunk } from './authAPI';
-// import { ILoginAsyncThunk, IRegAsyncThunk } from '../../hooks/useAsyncSubmit';
-// import { IAxiosRegistration } from '../../View/Components/Forms/types';
-// import { AsyncThunkFulfilledActionCreator } from '@reduxjs/toolkit/dist/createAsyncThunk';
+import { regThunk, loginThunk, loginOutThunk } from './authAPI';
 
 const initialState = {
     user: {
         userName: '',
-        userRole: '',
+        userRole: 'user',
         isLogin: false,
     },
     message: '',
@@ -25,14 +22,6 @@ const authSlice = createSlice({
         clearMessageContinueWork(state) {
             state.message = '';
             state.continueWork = false;
-        },
-        logout(state) {
-            state.continueWork = false;
-            state.user = {
-                isLogin: false,
-                userRole: '',
-                userName: '',
-            };
         },
     },
     extraReducers: builder => {
@@ -79,11 +68,32 @@ const authSlice = createSlice({
                     state.status = 'failed';
                     state.message = payload;
                 }
+            })
+            .addCase(loginOutThunk.pending, state => {
+                state.status = 'loading';
+            })
+            .addCase(
+                loginOutThunk.fulfilled,
+                (state, { payload: { continueWork, isLogin } }) => {
+                    state.status = 'idle';
+                    state.continueWork = continueWork;
+                    state.user = {
+                        isLogin: isLogin,
+                        userRole: 'user',
+                        userName: '',
+                    };
+                }
+            )
+            .addCase(loginOutThunk.rejected, (state, { payload }) => {
+                state.status = 'failed';
+                if (payload) {
+                    state.message = payload;
+                }
             });
     },
 });
 
-export const { clearMessageContinueWork, logout } = authSlice.actions;
-export const thunk = { regThunk, loginThunk };
+export const { clearMessageContinueWork } = authSlice.actions;
+export const thunk = { regThunk, loginThunk, loginOutThunk };
 
 export default authSlice.reducer;

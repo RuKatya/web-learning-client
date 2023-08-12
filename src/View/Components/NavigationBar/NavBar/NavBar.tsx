@@ -1,8 +1,8 @@
-import css from 'Navigation.module.scss';
+import css from './Navigation.module.scss';
 
 import { NavLink } from 'react-router-dom';
 
-import { logout } from '../../../../app/auth/authReducer';
+import { thunk } from '../../../../app/auth/authReducer';
 import { authUser } from '../../../../app/auth/selectors';
 import { useAppDispatch } from '../../../../app/hooks';
 import { useAppSelector } from '../../../../app/hooks';
@@ -21,8 +21,9 @@ import { useAppSelector } from '../../../../app/hooks';
 const NavBar = () => {
     const dispatch = useAppDispatch();
     const { isLogin } = useAppSelector(authUser);
+
     const handleLogout = () => {
-        dispatch(logout());
+        dispatch(thunk.loginOutThunk());
     };
 
     return (

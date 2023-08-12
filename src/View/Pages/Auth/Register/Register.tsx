@@ -14,11 +14,11 @@ import useAsyncSubmit, {
 } from '../../../../hooks/useAsyncSubmit';
 
 const Register = () => {
-    const userName = useInput('aaaa', validateName);
-    const email = useInput('bbb@mail.ru', validateEmail);
-    const password = useInput('qwe123!', validatePassword);
+    const userName = useInput('', validateName);
+    const email = useInput('', validateEmail);
+    const password = useInput('', validatePassword);
     const confirmPassword = useInput(
-        'qwe123!',
+        '',
         validateSimilarityPass(password.value)
     );
     const { handleSubmit } = useAsyncSubmit<IRegAsyncThunk>(

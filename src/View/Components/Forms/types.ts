@@ -5,6 +5,11 @@ export interface IAxiosRegistration {
     continueWork: boolean;
 }
 
+export interface IAxiosLogout {
+    isLogin: boolean;
+    continueWork: boolean;
+}
+
 export interface IAxiosLogin extends IAxiosRegistration {
     userName: string;
     userRole: string;

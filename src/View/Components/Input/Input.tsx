@@ -1,7 +1,16 @@
 import css from './Input.module.scss';
+
 import { FC, useState } from 'react';
+
 import { IInputForm } from '../Forms/types';
-import EyeIcon from '../../../assets/images/icons/EyeIcon';
+
+import EyeIconOpened from '../../../assets/images/icons/EyeIconOpened';
+import EyeIconClosed from '../../../assets/images/icons/EyeIconClosed';
+
+export enum InputE {
+    TEXT = 'text',
+    PASSWORD = 'password',
+}
 
 const Input: FC<IInputForm> = ({
     name,
@@ -13,29 +22,33 @@ const Input: FC<IInputForm> = ({
     handleChange = () => {},
 }) => {
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+
     const togglePasswordVisible = () => {
-        console.log('click');
         setPasswordVisible(visibility => !visibility);
     };
+
     return (
         <div className={css.inputWrapper}>
             <input
+                name={name}
                 className={css.input}
-                type={passwordVisible ? type : 'text'}
+                type={passwordVisible ? InputE.TEXT : type}
                 value={value}
                 onChange={handleChange}
                 onBlur={handleFocus}
                 placeholder={placeholder}
             />
-            {type === 'password' && (
+            {type === InputE.PASSWORD && (
                 <button
                     type="button"
                     onClick={togglePasswordVisible}
                     className={css.eyeBtn}
                 >
-                    <EyeIcon width={20} height={20} />
-
-                    {!passwordVisible && <div className={css.eyeClosed}></div>}
+                    {!passwordVisible ? (
+                        <EyeIconOpened width={20} height={20} />
+                    ) : (
+                        <EyeIconClosed width={20} height={20} />
+                    )}
                 </button>
             )}
 

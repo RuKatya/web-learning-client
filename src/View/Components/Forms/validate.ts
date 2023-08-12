@@ -7,7 +7,9 @@ const regexpSpace = new RegExp(/\s/g);
 const regexpNumber = new RegExp(/\d/g);
 const regexpLetter = new RegExp(/[a-zA-Z]/g);
 const regexpSpecChar = new RegExp(/[!@#$%^&*]/g);
-const regexpEn = new RegExp(/[^a-zA-Z0-9]/g);
+// const regexpEn = new RegExp(/^[a-zA-Z0-9e!@#$%^&*]+$/g);
+const regexpEn = new RegExp(/[^a-zA-Z0-9!@#$%^&*]/g);
+// const regexpEn = new RegExp(/[^a-zA-Z0-9]/g);
 
 export const validateName = (name: string) => {
     if (!name) {
@@ -33,15 +35,15 @@ export const validatePassword = (password: string) => {
         return "Password can't be empty";
     } else if (password.length < 6) {
         return 'Password must be minimum 6 symbols';
-    } else if (!regexpEn.test(password)) {
+    } else if (password.match(regexpEn)) {
         return 'Password must be only En';
-    } else if (regexpSpace.test(password)) {
+    } else if (password.match(regexpSpace)) {
         return 'Password must be without spaces';
-    } else if (!regexpNumber.test(password)) {
+    } else if (!password.match(regexpNumber)) {
         return 'Password must include numbers';
-    } else if (!regexpLetter.test(password)) {
+    } else if (!password.match(regexpLetter)) {
         return 'Password must include letters';
-    } else if (!regexpSpecChar.test(password)) {
+    } else if (!password.match(regexpSpecChar)) {
         return 'Password must include one character like !@#$%^&*';
     }
     return '';

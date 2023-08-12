@@ -3,7 +3,7 @@ interface IEyeIconProps {
     height: number;
 }
 
-const EyeIcon = ({ width, height }: IEyeIconProps) => {
+const EyeIconOpened = ({ width, height }: IEyeIconProps) => {
     return (
         <svg
             fill="#000000"
@@ -42,4 +42,4 @@ const EyeIcon = ({ width, height }: IEyeIconProps) => {
     );
 };
 
-export default EyeIcon;
+export default EyeIconOpened;

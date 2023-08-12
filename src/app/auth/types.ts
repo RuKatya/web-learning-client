@@ -1,5 +1,5 @@
 export type StatusT = 'idle' | 'loading' | 'failed';
-export type UserRoleT = 'user' | 'admin' | '';
+export type UserRoleT = 'user' | 'admin';
 
 export interface IUser {
     userName: string;
@@ -17,4 +17,5 @@ export interface IAuthState {
 export enum RoutesE {
     SAVE_USER = '/auth/save-user',
     LOGIN_USER = '/auth/login-user',
+    LOGOUT_USER = '/auth/user-logout',
 }
