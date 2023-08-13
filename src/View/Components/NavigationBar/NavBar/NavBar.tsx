@@ -6,6 +6,7 @@ import { thunk } from '../../../../app/auth/authReducer';
 import { authUser } from '../../../../app/auth/selectors';
 import { useAppDispatch } from '../../../../app/hooks';
 import { useAppSelector } from '../../../../app/hooks';
+import useMatchMedia from '../../../../hooks/useMatchMedia';
 
 // interface Links {
 //     url: string
@@ -21,6 +22,7 @@ import { useAppSelector } from '../../../../app/hooks';
 const NavBar = () => {
     const dispatch = useAppDispatch();
     const { isLogin } = useAppSelector(authUser);
+    const { isMobile, isTablet, isDesktop } = useMatchMedia();
 
     const handleLogout = () => {
         dispatch(thunk.loginOutThunk());

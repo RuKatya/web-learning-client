@@ -1,8 +1,11 @@
 // COLORS
+// BG
 // $main-bg-color: white;
 // $inverted-bg-color: black;
+// COLOR
 // $primary-color: black;
 // $inverted-color: white;
+
 // ANY
 // $standart-b-radius: 4px;
 
@@ -26,6 +29,18 @@ img {
     display: block;
 }
 
+html,
+body,
+#root,
+.app {
+    height: 100%;
+}
+
+html {
+    font-family: 'Times New Roman', sans-serif;
+    font-size: 16px;
+}
+
 .container {
     max-width: 1170px;
 
@@ -34,6 +49,7 @@ img {
 
     overflow: hidden;
 }
+
 //
 // ANIMATIONS
 //
@@ -45,3 +61,8 @@ img {
 //         opacity: 1;
 //     }
 // }
+
+// MEDIA QUERYS
+// @media (max-width: 766px) {}
+// @media (min-width: 767px) and (max-width: 1199px) {}
+// @media (min-width: 1200px) {}
