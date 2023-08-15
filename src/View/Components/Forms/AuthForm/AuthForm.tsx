@@ -17,7 +17,6 @@ interface IAuthFormProps {
     title: string;
     question: string;
     linkToBtn: string;
-    formAction: string;
     buttonText: string;
     questionLinkText: string;
     handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -29,7 +28,6 @@ const AuthForm: FC<IAuthFormProps> = ({
     question,
     linkToBtn,
     buttonText,
-    formAction,
     handleSubmit,
     questionLinkText,
 }) => {
@@ -55,7 +53,6 @@ const AuthForm: FC<IAuthFormProps> = ({
     return (
         <Form
             className={css.loginForm}
-            action={formAction}
             method="post"
             onSubmit={handleSubmit}
         >

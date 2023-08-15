@@ -8,45 +8,92 @@ import { useAppDispatch } from '../../../../app/hooks';
 import { useAppSelector } from '../../../../app/hooks';
 import useMatchMedia from '../../../../hooks/useMatchMedia';
 
-// interface Links {
-//     url: string
-//     title: string
-// }
+export interface Links {
+    url: string;
+    title: string;
+}
 
-// const linksForUser: Links[] = [
-//     { url: "/user-save-quizes", title: "Fav Quizes" },
-//     { url: "/user-statistic", title: "Statistic" },
-//     { url: "/user-profile", title: "Profile" },
-// ]
+const linksForUser: Links[] = [
+    { url: '/user-save-quizes', title: 'Fav Quizes' },
+    { url: '/user-statistic', title: 'Statistic' },
+    { url: '/user-profile', title: 'Profile' },
+];
 
 const NavBar = () => {
     const dispatch = useAppDispatch();
-    const { isLogin } = useAppSelector(authUser);
+    const { isLogin, userName, userRole } = useAppSelector(authUser);
     const { isMobile, isTablet, isDesktop } = useMatchMedia();
 
     const handleLogout = () => {
         dispatch(thunk.loginOutThunk());
     };
 
+    const addActiveLinkClass = ({
+        isActive,
+        isPending,
+    }: {
+        isActive: boolean;
+        isPending: boolean;
+    }) =>
+        isPending
+            ? 'pending'
+            : isActive
+            ? `${css.navigationLink} ${css.active}`
+            : css.navigationLink;
+
+    const loginConditionItem = isLogin ? (
+        <li className={css.navigationItem}>
+            <NavLink
+                className={addActiveLinkClass}
+                onClick={handleLogout}
+                to="/auth"
+            >
+                {userName} Log Out
+            </NavLink>
+        </li>
+    ) : (
+        <li className={css.navigationItem}>
+            <NavLink className={addActiveLinkClass} to="/auth">
+                Sign In
+            </NavLink>
+        </li>
+    );
+
+    const dashboard = userRole === 'admin' && (
+        <li className={css.navigationItem}>
+            <NavLink className={addActiveLinkClass} to="/admin-dashboard">
+                Dashboard
+            </NavLink>
+        </li>
+    );
+
+    const userLinks = linksForUser.map(({ title, url }) => (
+        <li key={title} className={css.navigationItem}>
+            <NavLink className={addActiveLinkClass} to={url}>
+                {title}{' '}
+                {title === 'Fav Quizes' && (
+                    <span className={css.favAmount}>0</span>
+                )}
+            </NavLink>
+        </li>
+    ));
+
+    console.log(isLogin, userRole, userName);
+
     return (
         <nav className={css.navigation}>
-            {/* <ul> */}
-
-            {!isLogin ? (
-                <NavLink to="/auth">Sign In</NavLink>
-            ) : (
-                <NavLink onClick={handleLogout} to="/auth">
-                    Log Out
-                </NavLink>
-            )}
-
-            {/*
-            {linksForUser.map(link => (
-                <li key={el.title}>
-                    <NavLink to={link.url}>{link.title}</NavLink>
-                </li>
-            ))}
-             </ul> */}
+            <ul className={css.navigationList}>
+                {!isMobile && isLogin && (
+                    <>
+                        <NavLink className={addActiveLinkClass} to="/">
+                            Home
+                        </NavLink>
+                        {userLinks}
+                    </>
+                )}
+                {dashboard}
+                {loginConditionItem}
+            </ul>
         </nav>
     );
 };

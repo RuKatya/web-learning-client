@@ -52,7 +52,6 @@ const Register = () => {
 
     return (
         <AuthForm
-            formAction="auth"
             linkToBtn="/auth"
             inputs={inputsReg}
             title="Registration"

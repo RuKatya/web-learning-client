@@ -41,7 +41,6 @@ const Login = () => {
         <AuthForm
             title="Log In"
             linkToBtn="reg"
-            formAction="auth"
             buttonText="Sign In"
             inputs={inputsLogin}
             handleSubmit={handleSubmit}

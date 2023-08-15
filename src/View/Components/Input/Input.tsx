@@ -22,7 +22,7 @@ const Input: FC<IInputForm> = ({
     handleChange = () => {},
 }) => {
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-    const [isHover, setIsHover] = useState<boolean>(false);
+    const [isHover, setIsHover] = useState<boolean>(true);
 
     const togglePasswordVisible = () => {
         setPasswordVisible(visibility => !visibility);
@@ -43,14 +43,17 @@ const Input: FC<IInputForm> = ({
                 className={css.input}
                 name={name}
                 value={value}
-                onBlur={handleFocus}
+                onBlur={e => {
+                    handleFocus(e);
+                    handleMouseLeave();
+                }}
                 onChange={handleChange}
-                onMouseEnter={isNamePassword ? handleMouseEnter : undefined}
-                onMouseLeave={isNamePassword ? handleMouseLeave : undefined}
+                onFocus={isNamePassword ? handleMouseEnter : undefined}
                 placeholder={placeholder}
                 type={passwordVisible ? InputE.TEXT : type}
             />
-            {isNamePassword && !error && (
+            {/* {isNamePassword && !error ( */}
+            {isNamePassword && (
                 <Tooltip isHover={isHover} position={'bottom'} message={''}>
                     <ul>
                         <li>* Password must be minimum 6 symbols</li>

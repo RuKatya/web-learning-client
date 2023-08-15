@@ -1,2 +1,36 @@
 .navigation {
+    max-height: 100px;
+    padding: 5px 20px;
+
+    background-color: red;
+    .navigationList {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+
+        margin-right: auto;
+        .navigationItem {
+            border: 1px solid black;
+            border-radius: 8px;
+            text-transform: uppercase;
+            overflow: hidden;
+        }
+    }
+    & a {
+        margin-right: auto;
+        padding: 15px 20px;
+        border-radius: 8px;
+        display: block;
+        &:first-child {
+            border: none;
+        }
+        &.active {
+            color: white;
+        }
+        .favAmount {
+            color: pink;
+            font-weight: bold;
+        }
+    }
 }
