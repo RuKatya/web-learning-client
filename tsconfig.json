@@ -1,10 +1,9 @@
 {
-  "extends": "tsconfig.pathes.json",
+  // "extends": "tsconfig.pathes.json",
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
       "app": [ "app/*" ],
-      // "pages": [ "app/**/pages/*" ],
       "store": [ "store/*" ],
       "hooks": [ "hooks/*" ],
       "utils": [ "utils/*" ],
@@ -32,7 +31,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    // vite
+    "types": [ "vite/client" ]
+
   },
   "include": [ "src" ]
 }
