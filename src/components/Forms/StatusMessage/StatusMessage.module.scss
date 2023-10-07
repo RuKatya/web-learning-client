@@ -1,0 +1,12 @@
+.success,
+.error {
+    min-height: 15px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+.error {
+    color: red;
+}
+.success {
+    color: green;
+}
