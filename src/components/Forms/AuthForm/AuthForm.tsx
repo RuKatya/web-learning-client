@@ -9,7 +9,7 @@ import { clearMessageContinueWork } from 'store/auth/authReducer';
 import { auth } from 'store/auth/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
-import { IInputForm } from '../types';
+import { IInputForm } from '../../../config/types';
 
 import css from './AuthForm.module.scss';
 
@@ -48,7 +48,6 @@ const AuthForm: FC<IAuthFormProps> = ({
       navigate('/');
     }
     dispatch(clearMessageContinueWork());
-    // eslint-disable-next-line
   }, [continueWork]);
 
   return (

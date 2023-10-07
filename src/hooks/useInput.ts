@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
 
-import { IInputForm } from 'components/Forms/types';
+import { IInputForm } from 'config/types';
 
 const useInput = (initValue: string, validate?: (arg: string) => string): IInputForm => {
   const [value, setValue] = useState<string>(initValue);

@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { ResponseLogin, ResponseLogout, ResponseRegistration } from 'components/Forms/types';
 import { ROUTES } from 'config/routes';
+import { ResponseLogin, ResponseLogout, ResponseRegistration } from 'config/types';
 
 import { LoginThunkResponse, RegThunkResponse } from 'hooks/useAsyncSubmit';
+
 import { getData, postData } from 'utils/fetchData';
 
-export type RejectValue = {
+type RejectValue = {
   rejectValue: string;
 };
 
@@ -51,10 +52,10 @@ export const loginOutThunk = createAsyncThunk<ResponseLogout, undefined, RejectV
   },
 );
 
-export const checkUserCookies = createAsyncThunk<any, any, { rejectValue: string }>(
+export const checkUserCookies = createAsyncThunk<ResponseLogin, unknown, { rejectValue: string }>(
   ROUTES.auth.userChecking.mask,
   async (__, { rejectWithValue }) => {
-    return await getData(ROUTES.auth.userChecking.mask)
+    return await getData<ResponseLogin>(ROUTES.auth.userChecking.mask)
       .then((data) => {
         return data;
       })

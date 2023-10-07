@@ -1,10 +1,10 @@
 import AuthForm from 'components/Forms/AuthForm/AuthForm';
-import { IInputForm } from 'components/Forms/types';
 
-import { validateEmail, validatePassword } from 'components/Forms/validate';
+import { IInputForm } from 'config/types';
 
 import useAsyncSubmit, { DispatchFormEnum, LoginThunkResponse } from 'hooks/useAsyncSubmit';
 import useInput from 'hooks/useInput';
+import { validateEmail, validatePassword } from 'utils/validate';
 
 const Login = () => {
   const email = useInput('qweqwe@main.ru', validateEmail);
@@ -14,7 +14,7 @@ const Login = () => {
     password: password.value,
   });
 
-  const inputsLogin: IInputForm[] = [
+  const loginInputs: IInputForm[] = [
     {
       ...email,
       name: 'email',
@@ -33,7 +33,7 @@ const Login = () => {
       title="Log In"
       linkToBtn="registration-user"
       buttonText="Sign In"
-      inputs={inputsLogin}
+      inputs={loginInputs}
       handleSubmit={handleSubmit}
       question="Dont't have an account"
       questionLinkText="Sign Up"
