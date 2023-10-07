@@ -1,17 +1,18 @@
+@import "styles/forward.scss";
+
 .loginForm {
-    max-width: 350px;
+  @include border(1px, black, 8px);
 
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 350px;
 
-    border: 1px solid black;
-    border-radius: 8px;
+  margin: $space-l auto;
+  padding: $space-l;
 
-    text-align: center;
-    &__title {
-        color: blue;
-    }
-    .question {
-        color: black;
-    }
+  text-align: center;
+  &__title {
+    color: blue;
+  }
+  .question {
+    color: black;
+  }
 }

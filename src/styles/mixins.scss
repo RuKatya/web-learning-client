@@ -1,0 +1,18 @@
+$lineHeightCalcValue: 1.5;
+
+@mixin flexbox($alignItems, $justifyContent: flex-start, $gap: 0) {
+  display: flex;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+  gap: $gap;
+}
+
+@mixin typo($fontSize, $fontWeight: 400) {
+  font-size: $fontSize;
+  line-height: calc($fontSize * $lineHeightCalcValue);
+  font-weight: $fontWeight;
+}
+@mixin border($borderWidth: 1px, $borderColor: black, $borderRadius: 0, $borderStyle: solid) {
+  border: $borderWidth $borderStyle $borderColor;
+  border-radius: $borderRadius;
+}

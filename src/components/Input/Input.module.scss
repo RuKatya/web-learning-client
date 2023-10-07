@@ -1,14 +1,14 @@
+@import "styles/forward.scss";
+
 .inputWrapper {
   position: relative;
   .input {
-    border: 1px solid black;
-    height: 30px;
+    @include border(1px, black, 4px);
 
-    padding-left: 10px;
-    padding-right: 30px;
+    height: 30px;
+    padding: 0 $space-xxxl 0 $space-s;
 
     font-size: 16px;
-    border-radius: 4px;
   }
 
   .input[type="password"]:hover + .tooltip {
@@ -49,6 +49,8 @@
 }
 
 .requirement__list {
+  padding-left: 20px;
   .requirement__item {
+    list-style-type: disc;
   }
 }

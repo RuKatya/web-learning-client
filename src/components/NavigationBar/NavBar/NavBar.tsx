@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
+import { ROUTES } from 'config/routes';
 import useMatchMedia from 'hooks/useMatchMedia';
 
 import { thunk } from 'store/auth/authReducer';
@@ -8,15 +9,20 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 
 import css from './Navigation.module.scss';
 
-export interface Links {
+type Links = {
   url: string;
-  title: string;
-}
+  label: string;
+};
+
+type addActiveLinkClass = {
+  isActive: boolean;
+  isPending: boolean;
+};
 
 const linksForUser: Links[] = [
-  { url: '/user-save-quizes', title: 'Fav Quizes' },
-  { url: '/user-statistic', title: 'Statistic' },
-  { url: '/user-profile', title: 'Profile' },
+  { url: ROUTES.favoriteQuizes.mask, label: 'Fav Quizes' },
+  { url: ROUTES.userStatistic.mask, label: 'Statistic' },
+  { url: ROUTES.profile.mask, label: 'Profile' },
 ];
 
 const NavBar = () => {
@@ -28,52 +34,21 @@ const NavBar = () => {
     dispatch(thunk.loginOutThunk());
   };
 
-  const addActiveLinkClass = ({ isActive, isPending }: { isActive: boolean; isPending: boolean }) =>
-    isPending ? 'pending' : isActive ? `${css.navigationLink} ${css.active}` : css.navigationLink;
+  const addActiveLinkClass = ({ isActive, isPending }: addActiveLinkClass) =>
+    isPending ? 'pending' : isActive ? `${css.navigation__link} ${css.active}` : css.navigation__link;
 
-  const loginConditionItem = isLogin ? (
-    <li className={css.navigationItem}>
-      <NavLink className={addActiveLinkClass} onClick={handleLogout} to="/auth">
-        {userName} Log Out
-      </NavLink>
-    </li>
-  ) : (
-    <li className={css.navigationItem}>
-      <NavLink className={addActiveLinkClass} to="/auth">
-        Sign In
-      </NavLink>
-    </li>
-  );
-
-  const dashboard = userRole === 'admin' && (
-    <li className={css.navigationItem}>
-      <NavLink className={addActiveLinkClass} to="/admin-dashboard">
-        Dashboard
-      </NavLink>
-    </li>
-  );
-
-  const userLinks = linksForUser.map(({ title, url }) => (
-    <li key={title} className={css.navigationItem}>
+  const userLinks = linksForUser.map(({ label, url }) => (
+    <li key={label} className={css.navigation__item}>
       <NavLink className={addActiveLinkClass} to={url}>
-        {title}
-        {title === 'Fav Quizes' && <span className={css.favAmount}>0</span>}
+        <span className={css.navigation__label}>{label}</span>
+        {label === 'Fav Quizes' && <span className={css.navigation__favorite}>0</span>}
       </NavLink>
     </li>
   ));
 
-  //
-  //
-  // CHECKBUTTON DELETE
-  const handler = () => {
-    // dispatch(thunk.checkUserCookies({ isLogin, userName, userRole });
-  };
-
   return (
     <nav className={css.navigation}>
-      <button onClick={handler}>BUTTON CHECK</button>
-      <ul className={css.navigationList}>
-        {' '}
+      <ul className={css.navigation__list}>
         {!isMobile && isLogin && (
           <>
             <NavLink className={addActiveLinkClass} to="/">
@@ -82,8 +57,20 @@ const NavBar = () => {
             {userLinks}
           </>
         )}
-        {dashboard}
-        {loginConditionItem}
+
+        <li className={css.navigation__item}>
+          <NavLink className={addActiveLinkClass} onClick={isLogin ? handleLogout : undefined} to="/auth">
+            {isLogin ? `${userName} Log Out` : 'Sign In'}
+          </NavLink>
+        </li>
+
+        {userRole === 'admin' && (
+          <li className={css.navigation__item}>
+            <NavLink className={addActiveLinkClass} to="/admin-dashboard">
+              Dashboard
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

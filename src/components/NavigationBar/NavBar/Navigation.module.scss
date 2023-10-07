@@ -1,36 +1,35 @@
+@import "styles/forward";
+
 .navigation {
-    max-height: 100px;
-    padding: 5px 20px;
+  max-height: 100px;
+  padding: $space-xxs $space-l;
 
-    background-color: red;
-    .navigationList {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
+  background-color: red;
+  &__list {
+    @include flexbox(center);
+    height: 100%;
+    column-gap: 5px;
 
-        margin-right: auto;
-        .navigationItem {
-            border: 1px solid black;
-            border-radius: 8px;
-            text-transform: uppercase;
-            overflow: hidden;
-        }
+    margin-right: auto;
+  }
+
+  &__item {
+    @include border(1px, black, 8px);
+    overflow: hidden;
+  }
+
+  &__link {
+    display: inline-block;
+
+    margin-right: auto;
+    padding: $space-m $space-l;
+
+    &.active {
+      color: white;
     }
-    & a {
-        margin-right: auto;
-        padding: 15px 20px;
-        border-radius: 8px;
-        display: block;
-        &:first-child {
-            border: none;
-        }
-        &.active {
-            color: white;
-        }
-        .favAmount {
-            color: pink;
-            font-weight: bold;
-        }
-    }
+  }
+
+  &__favorite {
+    margin-left: $space-xxs;
+  }
 }

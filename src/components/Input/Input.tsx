@@ -1,8 +1,10 @@
+import classnames from 'classnames';
 import { FC, useState } from 'react';
+
+import Tooltip from 'components/Tooltip';
 
 import { IInputForm } from 'config/types';
 
-import Tooltip from '../Tooltip/Tooltip';
 import EyeButton from './EyeButton';
 
 import css from './Input.module.scss';
@@ -53,6 +55,8 @@ const Input: FC<IInputForm> = ({
   const isNamePassword = name === 'password';
   const inputType = passwordVisible ? 'text' : type;
 
+  const cnError = classnames(css.error, error && css.hidden);
+
   return (
     <div className={css.inputWrapper}>
       <input
@@ -67,9 +71,6 @@ const Input: FC<IInputForm> = ({
         placeholder={placeholder}
       />
       {isNamePassword && (
-        //
-        // TO do list id items
-        //
         <Tooltip isHover={isHover} position={'bottom'} message={''}>
           <ul className={css.requirement__list}>{requirementsList}</ul>
         </Tooltip>
@@ -84,7 +85,7 @@ const Input: FC<IInputForm> = ({
         />
       )}
 
-      <div className={error ? css.error : `${css.error} ${css.hidden}`}>{error}</div>
+      <div className={cnError}>{error}</div>
     </div>
   );
 };
