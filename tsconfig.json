@@ -1,5 +1,19 @@
 {
+  "extends": "tsconfig.pathes.json",
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "app": [ "app/*" ],
+      // "pages": [ "app/**/pages/*" ],
+      "store": [ "store/*" ],
+      "hooks": [ "hooks/*" ],
+      "utils": [ "utils/*" ],
+      "config": [ "config/*" ],
+      "assets": [ "assets/*" ],
+      "styles": [ "styles/*" ],
+      "Router": [ "Router/*" ],
+      "components": [ "components/*" ]
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -20,7 +34,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "include": [ "src" ]
 }

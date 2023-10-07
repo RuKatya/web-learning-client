@@ -1,48 +1,45 @@
 import { FormEvent } from 'react';
-import { thunk } from '../app/auth/authReducer';
-import { useAppDispatch } from '../app/hooks';
+import { thunk } from '../store/auth/authReducer';
+import { useAppDispatch } from '../store/hooks';
 
 export interface IUseAsyncSubmitReturn {
-    handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
-export interface ILoginAsyncThunk {
-    email: string;
-    password: string;
+export interface LoginThunkResponse {
+  email: string;
+  password: string;
 }
-export interface IRegAsyncThunk extends ILoginAsyncThunk {
-    userName: string;
-    confirmPassword: string;
-}
-
-export enum DispatchTypesE {
-    REG = 'reg',
-    LOGIN = 'login',
+export interface RegThunkResponse extends LoginThunkResponse {
+  userName: string;
+  confirmPassword: string;
 }
 
-const useAsyncSubmit = <T>(
-    dispatchType: DispatchTypesE,
-    rest: T
-): IUseAsyncSubmitReturn => {
-    const dispatch = useAppDispatch();
+export enum DispatchFormEnum {
+  REG = 'registration-user',
+  LOGIN = 'login',
+}
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+const useAsyncSubmit = <T>(dispatchType: DispatchFormEnum, rest: T): IUseAsyncSubmitReturn => {
+  const dispatch = useAppDispatch();
 
-        switch (dispatchType) {
-            case DispatchTypesE.REG:
-                dispatch(thunk.regThunk(rest as unknown as IRegAsyncThunk));
-                break;
-            case DispatchTypesE.LOGIN:
-                dispatch(thunk.loginThunk(rest as unknown as ILoginAsyncThunk));
-                break;
-            default:
-                break;
-        }
-    };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    return {
-        handleSubmit,
-    };
+    switch (dispatchType) {
+      case DispatchFormEnum.REG:
+        dispatch(thunk.regThunk(rest as unknown as RegThunkResponse));
+        break;
+      case DispatchFormEnum.LOGIN:
+        dispatch(thunk.loginThunk(rest as unknown as LoginThunkResponse));
+        break;
+      default:
+        break;
+    }
+  };
+
+  return {
+    handleSubmit,
+  };
 };
 
 export default useAsyncSubmit;
