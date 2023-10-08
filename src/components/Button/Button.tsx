@@ -1,22 +1,25 @@
+import classnames from 'classnames';
 import { ButtonHTMLAttributes, FC } from 'react';
 import { Spinner } from '../Loader';
 import css from './Button.module.scss';
 
 // sizes for button in css
-export enum EButtonSize {
+// sizes refactor
+// classnames
+export enum ButtonSizeEnum {
   SMALL = 's',
   MEDIUM = 'm',
   LARGE = 'l',
 }
-export enum EButtonPosition {
+export enum ButtonPositionEnum {
   CENTER = 'center',
   RIGHT = 'right',
 }
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size: EButtonSize;
+  size: ButtonSizeEnum;
   children: string;
-  position: EButtonPosition;
+  position: ButtonPositionEnum;
   style?: object;
   isLoading?: boolean;
   spinnerWidth?: number;
@@ -26,7 +29,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: FC<IButtonProps> = ({
-  size = EButtonSize.SMALL,
+  size = ButtonSizeEnum.SMALL,
   children,
   position,
   style = {},
@@ -34,6 +37,7 @@ const Button: FC<IButtonProps> = ({
   spinnerWidth,
   spinnerHeight,
 }) => {
+  const cnButton = classnames(css.button);
   const classes = `${css.button} ${css[size]} ${css[position]}`;
 
   return (

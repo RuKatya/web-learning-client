@@ -1,5 +1,4 @@
 {
-  // "extends": "tsconfig.pathes.json",
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
@@ -10,7 +9,6 @@
       "config": [ "config/*" ],
       "assets": [ "assets/*" ],
       "styles": [ "styles/*" ],
-      "Router": [ "Router/*" ],
       "components": [ "components/*" ]
     },
     "target": "es5",

@@ -1,8 +1,8 @@
 import AuthForm from 'components/Forms/AuthForm';
 import { IInputForm } from 'config/types';
 
-import useAsyncSubmit, { DispatchFormEnum, RegThunkResponse } from 'hooks/useAsyncSubmit';
 import useInput from 'hooks/useInput';
+import useSubmit, { DispatchFormEnum, RegThunkResponse } from 'hooks/useSubmit';
 import { validateEmail, validateName, validatePassword, validateSimilarityPass } from 'utils/validate';
 
 const Register = () => {
@@ -11,7 +11,7 @@ const Register = () => {
   const password = useInput('', validatePassword);
   const confirmPassword = useInput('', validateSimilarityPass(password.value));
 
-  const { handleSubmit } = useAsyncSubmit<RegThunkResponse>(DispatchFormEnum.REG, {
+  const { handleSubmit } = useSubmit<RegThunkResponse>(DispatchFormEnum.REG, {
     userName: userName.value,
     email: email.value,
     password: password.value,

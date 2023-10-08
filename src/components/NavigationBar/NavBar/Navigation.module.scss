@@ -1,31 +1,31 @@
-@import "styles/forward";
+@import "styles/forward.scss";
 
 .navigation {
-  max-height: 100px;
-  padding: $space-xxs $space-l;
+  @include flexbox(center, space-between, 8px);
 
-  background-color: red;
+  height: 70px;
+  padding: 0 $space-xxs;
+
+  font-size: 1.2rem;
+
   &__list {
-    @include flexbox(center);
+    @include flexbox(center, center, 4px);
     height: 100%;
-    column-gap: 5px;
-
-    margin-right: auto;
   }
 
   &__item {
-    @include border(1px, black, 8px);
-    overflow: hidden;
+    @include border(1px, $glass3, 8px);
   }
 
   &__link {
     display: inline-block;
 
     margin-right: auto;
-    padding: $space-m $space-l;
+    padding: $space-xxs $space-l;
+    color: $text-primary;
 
     &.active {
-      color: white;
+      color: $text-red;
     }
   }
 

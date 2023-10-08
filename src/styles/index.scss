@@ -1,4 +1,5 @@
-@import "./reset";
+@import "./reset.scss";
+@import "./forward.scss";
 
 html,
 body,
@@ -11,13 +12,25 @@ body,
 html {
   font-family: "Times New Roman", sans-serif;
   font-size: 16px;
-  color: black;
+  color: $text-primary;
+}
+
+body {
+  background-image: url("../assets/images/main-background.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
 }
 
 // HOVER EFFECT
-a:hover {
-  color: yellow;
-  background-color: rgba(0, 0, 0, 0.5);
+a {
+  border: 1px solid transparent;
+
+  &:hover {
+    color: yellow;
+    @include glassmorphism;
+    // background-color: rgba(0, 0, 0, 0.2);
+  }
 }
 //
 // ANIMATIONS

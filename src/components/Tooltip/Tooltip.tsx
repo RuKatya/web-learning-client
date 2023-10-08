@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { FC, ReactNode } from 'react';
 
 import css from './Tooltip.module.scss';
@@ -10,10 +11,10 @@ interface ITooltipProps {
 }
 
 const Tooltip: FC<ITooltipProps> = ({ message = '', position, children, isHover }) => {
-  const hover = isHover ? css.active : undefined;
-  const classes = `${css.tooltip} ${hover} ${css[position]}`;
+  const cnTooltop = classnames(css.tooltip, isHover && css.active, css[position]);
+
   return (
-    <div className={classes}>
+    <div className={cnTooltop}>
       {children}
       <span className={css.tooltipText}>{message}</span>
     </div>

@@ -1,4 +1,7 @@
 export const ROUTES = {
+  home: {
+    mask: '/',
+  },
   auth: {
     mask: '/auth',
     saveUser: {

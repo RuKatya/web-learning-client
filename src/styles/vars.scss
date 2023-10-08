@@ -9,12 +9,20 @@ $space-xs: 8px;
 $space-xxs: 4px;
 
 // TEXT-COLOR
-// $text-primary: black;
-// $text-secondary: black;
-// $text-decoration: black;
+$text-primary: white;
+$text-secondary: black;
+$text-decoration: rgb(25, 151, 25);
+$text-red: rgb(255, 0, 0, 0.8);
 
 // BACKGROUND-COLOR
-// $bg-primary: black;
-// $bg-primary-inverted: black;
-// $bg-secondary: black;
-// $bg-secondary-inverted: black;
+$background-primary: black;
+$background-primary-inverted: white;
+$background-secondary: green;
+$background-secondary-inverted: rgb(202, 128, 236);
+
+// GLASS
+$glass0: rgba(255, 255, 255, 1);
+$glass1: rgba(255, 255, 255, 0.8);
+$glass2: rgba(255, 255, 255, 0.6);
+$glass3: rgba(255, 255, 255, 0.4);
+$glass4: rgba(255, 255, 255, 0.2);

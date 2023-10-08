@@ -1,12 +1,11 @@
-import { FC } from 'react';
 import css from './StatusMessage.module.scss';
 
-interface IStatusMessageProps {
+interface StatusMessageProps {
   message: string;
   continueWork: boolean;
 }
 
-const StatusMessage: FC<IStatusMessageProps> = ({ continueWork = false, message = '' }) => {
+const StatusMessage = ({ continueWork = false, message = '' }: StatusMessageProps) => {
   return <p className={continueWork ? css.success : css.error}>{message}</p>;
 };
 

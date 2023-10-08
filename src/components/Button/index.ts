@@ -1,2 +1,2 @@
 export { default } from './Button';
-export { EButtonPosition, EButtonSize } from './Button';
+export { ButtonPositionEnum, ButtonSizeEnum } from './Button';

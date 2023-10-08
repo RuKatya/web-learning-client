@@ -1,25 +1,19 @@
-import { FC } from 'react';
-
 import EyeIconClosed from 'assets/images/icons/EyeIconClosed';
 import EyeIconOpened from 'assets/images/icons/EyeIconOpened';
 
 import css from './Input.module.scss';
 
-interface IEyeButtonProps {
+interface EyeButtonProps {
   width: number;
   height: number;
-  passwordVisible: boolean;
-  togglePasswordVisible: () => void;
+  isVisible: boolean;
+  toggleIsVisible: () => void;
 }
 
-const EyeButton: FC<IEyeButtonProps> = ({ width, height, passwordVisible, togglePasswordVisible }) => {
+const EyeButton = ({ width, height, isVisible, toggleIsVisible }: EyeButtonProps) => {
   return (
-    <button type="button" onClick={togglePasswordVisible} className={css.eyeBtn}>
-      {passwordVisible ? (
-        <EyeIconOpened width={width} height={height} />
-      ) : (
-        <EyeIconClosed width={width} height={height} />
-      )}
+    <button style={{ width, height }} type="button" onClick={toggleIsVisible} className={css.eyeBtn}>
+      {isVisible ? <EyeIconOpened width={width} height={height} /> : <EyeIconClosed width={width} height={height} />}
     </button>
   );
 };

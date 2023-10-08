@@ -1,17 +1,21 @@
-// TOOLTIP SIDES STYLES
+@import "styles/forward.scss";
+
 .tooltip {
   position: absolute;
+  top: -150%;
+  right: -420px;
   z-index: 1;
 
   width: 100%;
 
-  padding: 10px;
+  padding: $space-s $space-m;
 
-  border-radius: 8px;
-  background-color: #e5e5e5;
   transition: opacity 0.3s ease-in-out;
-
   text-align: left;
+
+  @include glassmorphism();
+  text-shadow: 0 2px 20px $text-secondary;
+  background-color: #e5e5e5d2;
 
   opacity: 0;
   pointer-events: none;
@@ -20,63 +24,15 @@
   &.active {
     opacity: 1;
   }
-  &.top {
-    // left: 50%;
-    // top: -550%;
-    // transform: translateX(-50%);
-    // &::before {
-    //     position: absolute;
-    //     top: 100%;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //     content: '';
-    //     border: 10px solid transparent; /* Прозрачные границы */
-    //     border-top: 10px solid #e5e5e5; /* Добавляем треугольник */
-    // }
-  }
-  &.right {
-    // left: 50%;
-    // top: -550%;
-    // transform: translateX(-50%);
-    // &::before {
-    //     position: absolute;
-    //     top: 100%;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //     content: '';
-    //     border: 10px solid transparent; /* Прозрачные границы */
-    //     border-top: 10px solid #e5e5e5; /* Добавляем треугольник */
-    // }
-  }
-  &.bottom {
-    left: 50%;
-    top: 130%;
-    transform: translateX(-50%);
-    &::before {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      content: "";
-      border: 10px solid transparent; /* Прозрачные границы */
-      border-bottom: 10px solid #e5e5e5; /* Добавляем треугольник */
-    }
-  }
-  &.left {
-    // left: 50%;
-    // top: -550%;
-    // transform: translateX(-50%);
-    // &::before {
-    //     position: absolute;
-    //     top: 100%;
-    //     left: 50%;
-    //     transform: translateX(-50%);
-    //     content: '';
-    //     border: 10px solid transparent; /* Прозрачные границы */
-    //     border-top: 10px solid #e5e5e5; /* Добавляем треугольник */
-    // }
-  }
 
-  .tooltipText {
+  transform: translateX(-50%);
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: -7%;
+    transform: translate(7%, -50%);
+    content: "";
+    border: 10px solid transparent; /* Прозрачные границы */
+    border-right: 10px solid #e5e5e5d2; /* Добавляем треугольник */
   }
 }

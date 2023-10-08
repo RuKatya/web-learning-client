@@ -1,50 +1,57 @@
 @import "styles/forward.scss";
 
-.inputWrapper {
-  position: relative;
+.input__wrapper {
+  @include flexbox(center, space-between, $space-xxs);
+  @include border(1px, $glass4, 4px);
+
+  padding: $space-xxs $space-s;
+
   .input {
-    @include border(1px, black, 4px);
-
-    height: 30px;
-    padding: 0 $space-xxxl 0 $space-s;
-
-    font-size: 16px;
-  }
-
-  .input[type="password"]:hover + .tooltip {
-    color: red;
+    font-size: 1.2rem;
+    width: 90%;
   }
 
   .eyeBtn {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+    fill: $glass1;
 
-    position: absolute;
-    top: 5px;
-    right: 13%;
     &:focus {
       outline: none;
     }
   }
+}
 
-  .error {
-    margin-bottom: 10px;
-    transform: translateY(0px);
+.error {
+  margin-bottom: $space-m;
+  transform: translateY(0px);
 
-    opacity: 1;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+
+  color: $text-red;
+
+  visibility: visible;
+  pointer-events: visible;
+
+  &.hidden {
+    transform: translateY(-20px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 
     transition: all 0.2s ease-in-out;
-    color: red;
+    color: $text-red;
+  }
+}
 
-    &.hidden {
-      transform: translateY(-20px);
-
-      opacity: 0;
-
-      transition: all 0.2s ease-in-out;
-      color: red;
-    }
+@keyframes translate {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

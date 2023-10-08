@@ -12,7 +12,16 @@ $lineHeightCalcValue: 1.5;
   line-height: calc($fontSize * $lineHeightCalcValue);
   font-weight: $fontWeight;
 }
+
 @mixin border($borderWidth: 1px, $borderColor: black, $borderRadius: 0, $borderStyle: solid) {
   border: $borderWidth $borderStyle $borderColor;
   border-radius: $borderRadius;
+}
+
+@mixin glassmorphism($bakgroundColor: rgba(255, 255, 255, 0.2)) {
+  background: $bakgroundColor;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px 0 rgba(35, 40, 135, 0.4);
 }

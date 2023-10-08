@@ -4,6 +4,8 @@ import { defineConfig } from 'vite';
 
 const srcPath = path.resolve(__dirname, './src');
 
+// function to calulatePathes from tsconfig
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -21,7 +23,6 @@ export default defineConfig({
       utils: path.resolve(srcPath, './utils'),
       config: path.resolve(srcPath, './config'),
       styles: path.resolve(srcPath, './styles'),
-      Router: path.resolve(srcPath, './Router'),
       assets: path.resolve(srcPath, './assets'),
       components: path.resolve(srcPath, './components'),
     },

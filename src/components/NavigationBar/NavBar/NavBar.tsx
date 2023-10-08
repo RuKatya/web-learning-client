@@ -48,15 +48,12 @@ const NavBar = () => {
 
   return (
     <nav className={css.navigation}>
+      <NavLink className={addActiveLinkClass} to="/">
+        Home
+      </NavLink>
+
       <ul className={css.navigation__list}>
-        {!isMobile && isLogin && (
-          <>
-            <NavLink className={addActiveLinkClass} to="/">
-              Home
-            </NavLink>
-            {userLinks}
-          </>
-        )}
+        {!isMobile && isLogin && <>{userLinks}</>}
 
         <li className={css.navigation__item}>
           <NavLink className={addActiveLinkClass} onClick={isLogin ? handleLogout : undefined} to="/auth">

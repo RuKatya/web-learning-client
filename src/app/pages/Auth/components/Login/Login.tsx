@@ -1,15 +1,16 @@
 import AuthForm from 'components/Forms/AuthForm/AuthForm';
+// import EyeButton from 'components/Input/EyeButton';
 
 import { IInputForm } from 'config/types';
 
-import useAsyncSubmit, { DispatchFormEnum, LoginThunkResponse } from 'hooks/useAsyncSubmit';
 import useInput from 'hooks/useInput';
+import useSubmit, { DispatchFormEnum, LoginThunkResponse } from 'hooks/useSubmit';
 import { validateEmail, validatePassword } from 'utils/validate';
 
 const Login = () => {
   const email = useInput('qweqwe@main.ru', validateEmail);
   const password = useInput('qwe123!', validatePassword);
-  const { handleSubmit } = useAsyncSubmit<LoginThunkResponse>(DispatchFormEnum.LOGIN, {
+  const { handleSubmit } = useSubmit<LoginThunkResponse>(DispatchFormEnum.LOGIN, {
     email: email.value,
     password: password.value,
   });
@@ -25,6 +26,7 @@ const Login = () => {
       name: 'password',
       type: 'password',
       placeholder: 'Type password...',
+      // afterSlot: <EyeButton />,
     },
   ];
 

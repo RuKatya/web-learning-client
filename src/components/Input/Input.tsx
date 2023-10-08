@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
 import Tooltip from 'components/Tooltip';
 
@@ -23,7 +23,7 @@ const requirements = [
   { label: 'Password must include one character like !@#$%^&amp;' },
 ];
 
-const Input: FC<IInputForm> = ({
+const Input = ({
   name,
   type = 'text',
   error,
@@ -31,17 +31,19 @@ const Input: FC<IInputForm> = ({
   placeholder = 'Type here...',
   handleFocus,
   handleChange,
-}) => {
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  afterSlot,
+}: IInputForm) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isHover, setIsHover] = useState<boolean>(false);
 
-  const togglePasswordVisible = () => {
-    setPasswordVisible((visibility) => !visibility);
+  const toggleIsVisible = () => {
+    setIsVisible((visibility) => !visibility);
   };
 
   const handleMouseEnter = () => {
     setIsHover(true);
   };
+
   const handleMouseLeave = () => {
     setIsHover(false);
   };
@@ -53,40 +55,36 @@ const Input: FC<IInputForm> = ({
   ));
 
   const isNamePassword = name === 'password';
-  const inputType = passwordVisible ? 'text' : type;
+  const inputType = isVisible ? 'text' : type;
 
   const cnError = classnames(css.error, error && css.hidden);
 
   return (
-    <div className={css.inputWrapper}>
-      <input
-        className={css.input}
-        type={inputType}
-        name={name}
-        value={value}
-        onBlur={handleFocus}
-        onChange={handleChange}
-        onMouseEnter={isNamePassword ? handleMouseEnter : undefined}
-        onMouseLeave={isNamePassword ? handleMouseLeave : undefined}
-        placeholder={placeholder}
-      />
+    <>
+      <div className={css.input__wrapper}>
+        <input
+          className={css.input}
+          type={inputType}
+          name={name}
+          value={value}
+          onBlur={handleFocus}
+          onChange={handleChange}
+          onMouseEnter={isNamePassword ? handleMouseEnter : undefined}
+          onMouseLeave={isNamePassword ? handleMouseLeave : undefined}
+          placeholder={placeholder}
+        />
+
+        {type === InputType.PASSWORD && (
+          <EyeButton width={20} height={20} isVisible={isVisible} toggleIsVisible={toggleIsVisible} />
+        )}
+      </div>
       {isNamePassword && (
         <Tooltip isHover={isHover} position={'bottom'} message={''}>
           <ul className={css.requirement__list}>{requirementsList}</ul>
         </Tooltip>
       )}
-
-      {type === InputType.PASSWORD && (
-        <EyeButton
-          width={20}
-          height={20}
-          passwordVisible={passwordVisible}
-          togglePasswordVisible={togglePasswordVisible}
-        />
-      )}
-
       <div className={cnError}>{error}</div>
-    </div>
+    </>
   );
 };
 export default Input;

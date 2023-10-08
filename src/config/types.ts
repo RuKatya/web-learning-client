@@ -1,5 +1,5 @@
-import { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react';
-import { UserRoleT } from 'store/auth/types';
+import { ChangeEvent, FocusEvent, InputHTMLAttributes, ReactNode } from 'react';
+import { UserRole } from 'store/auth/types';
 
 export interface ResponseRegistration {
   message: string;
@@ -13,7 +13,7 @@ export interface ResponseLogout {
 
 export interface ResponseLogin extends ResponseRegistration {
   userName: string;
-  userRole: UserRoleT;
+  userRole: UserRole;
   isLogin: boolean;
 }
 
@@ -22,4 +22,5 @@ export interface IInputForm extends InputHTMLAttributes<HTMLInputElement> {
   error: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleFocus: (e: FocusEvent<HTMLInputElement>) => void;
+  afterSlot?: ReactNode;
 }
