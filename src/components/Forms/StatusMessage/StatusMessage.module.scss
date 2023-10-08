@@ -1,12 +1,25 @@
+@import "styles/forward.scss";
+
 .success,
 .error {
-    min-height: 15px;
-    margin-bottom: 4px;
-    margin-top: 4px;
+  margin: $space-xs;
+  animation: translate 0.3s ease-in;
 }
+
 .error {
-    color: red;
+  color: $text-red;
 }
 .success {
-    color: green;
+  color: green;
+}
+
+@keyframes translate {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

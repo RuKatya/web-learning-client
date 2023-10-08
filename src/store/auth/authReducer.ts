@@ -82,9 +82,9 @@ const authSlice = createSlice({
         state.status = 'idle';
         state.continueWork = continueWork;
         state.user = {
-          isLogin: isLogin,
-          userRole: userRole,
-          userName: userName,
+          isLogin,
+          userRole,
+          userName,
         };
       })
       .addCase(checkUserCookies.rejected, (state, { payload }) => {

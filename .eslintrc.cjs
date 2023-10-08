@@ -18,6 +18,7 @@ module.exports = {
     browser: true,
   },
   extends: [
+    'react-app',
     'eslint:recommended',
     'prettier',
     'plugin:import/errors',

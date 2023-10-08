@@ -1,15 +1,15 @@
-export type StatusT = 'idle' | 'loading' | 'failed';
-export type UserRoleT = 'user' | 'admin';
+export type Status = 'idle' | 'loading' | 'failed';
+export type UserRole = 'user' | 'admin';
 
 export interface IUser {
   userName: string;
-  userRole: UserRoleT;
+  userRole: UserRole;
   isLogin: boolean;
 }
 
 export interface IAuthState {
   user: IUser;
   message: string;
-  status: StatusT;
+  status: Status;
   continueWork: boolean;
 }

@@ -2,21 +2,6 @@ import axios from 'axios';
 
 import { API_BASE_URL, config } from 'config/api';
 
-export async function postData<T, K>(url: string, body: T): Promise<K> {
-  return await axios
-    .post<K>(API_BASE_URL + url, body, config)
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((data) => {
-      if (axios.isAxiosError(data)) {
-        return data.response?.data.message;
-      } else {
-        throw new Error('An unexpected error occurred');
-      }
-    });
-}
-
 export async function getData<T>(url: string): Promise<T> {
   return await axios
     .get<T>(API_BASE_URL + url, config)
@@ -25,7 +10,22 @@ export async function getData<T>(url: string): Promise<T> {
     })
     .catch((data) => {
       if (axios.isAxiosError(data)) {
-        return data.response?.data.message;
+        throw data.response?.data.message;
+      } else {
+        throw new Error('An unexpected error occurred');
+      }
+    });
+}
+
+export async function postData<T, K>(url: string, body: T): Promise<K> {
+  return await axios
+    .post<K>(API_BASE_URL + url, body, config)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((data) => {
+      if (axios.isAxiosError(data)) {
+        throw data.response?.data.message;
       } else {
         throw new Error('An unexpected error occurred');
       }

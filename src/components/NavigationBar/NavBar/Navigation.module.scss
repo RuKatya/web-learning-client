@@ -1,36 +1,35 @@
+@import "styles/forward.scss";
+
 .navigation {
-    max-height: 100px;
-    padding: 5px 20px;
+  @include flexbox(center, space-between, 8px);
 
-    background-color: red;
-    .navigationList {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
+  height: 70px;
+  padding: 0 $space-xxs;
 
-        margin-right: auto;
-        .navigationItem {
-            border: 1px solid black;
-            border-radius: 8px;
-            text-transform: uppercase;
-            overflow: hidden;
-        }
+  font-size: 1.2rem;
+
+  &__list {
+    @include flexbox(center, center, 4px);
+    height: 100%;
+  }
+
+  &__item {
+    @include border(1px, $glass3, 8px);
+  }
+
+  &__link {
+    display: inline-block;
+
+    margin-right: auto;
+    padding: $space-xxs $space-l;
+    color: $text-primary;
+
+    &.active {
+      color: $text-red;
     }
-    & a {
-        margin-right: auto;
-        padding: 15px 20px;
-        border-radius: 8px;
-        display: block;
-        &:first-child {
-            border: none;
-        }
-        &.active {
-            color: white;
-        }
-        .favAmount {
-            color: pink;
-            font-weight: bold;
-        }
-    }
+  }
+
+  &__favorite {
+    margin-left: $space-xxs;
+  }
 }
