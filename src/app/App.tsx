@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Container from 'components/Container';
-import NavBar from 'components/NavigationBar/NavBar';
+import Header from 'components/Header';
 
 import { thunk } from 'store/auth/authReducer';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="app">
       <Container>
-        <NavBar />
+        <Header />
         <Outlet />
       </Container>
     </div>

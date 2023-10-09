@@ -1,0 +1,14 @@
+@import "styles/forward.scss";
+
+.header {
+  position: relative;
+
+  .navigation {
+    @include flexbox(center, space-between, 8px);
+
+    height: 70px;
+    padding: 0 $space-xxs;
+
+    font-size: 1.2rem;
+  }
+}
