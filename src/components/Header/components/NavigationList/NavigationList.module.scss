@@ -1,0 +1,62 @@
+@import "styles/forward.scss";
+
+.navigation__list {
+  @include flexbox(center, flex-end, 8px);
+  flex: 1;
+}
+
+.navigation__item,
+.navigation__item_login,
+.navigation__item_home {
+  @include border(1px, $glass3, 12px);
+
+  &:hover {
+    @include glassmorphism;
+  }
+
+  &_home {
+    margin-right: auto;
+  }
+}
+
+.navigation__link {
+  display: inline-block;
+
+  margin-right: auto;
+  padding: $space-xxs $space-l;
+  color: $text-primary;
+
+  &.active {
+    color: $text-red;
+  }
+}
+
+.navigation__favorite {
+  margin-left: $space-xxs;
+}
+
+@media (max-width: 768px) {
+  .navigation__list {
+    margin-top: 100px;
+    flex-direction: column;
+  }
+
+  .navigation__item,
+  .navigation__item_login {
+    margin-top: $space-l;
+  }
+
+  .navigation__item,
+  .navigation__item_home,
+  .navigation__item_login {
+    border: 1px solid transparent;
+    width: 250px;
+
+    font-size: 1.6rem;
+    text-align: center;
+
+    &_home {
+      margin-right: 0;
+    }
+  }
+}
