@@ -1,5 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "app": [ "app/*" ],
+      "store": [ "store/*" ],
+      "hooks": [ "hooks/*" ],
+      "utils": [ "utils/*" ],
+      "config": [ "config/*" ],
+      "assets": [ "assets/*" ],
+      "styles": [ "styles/*" ],
+      "components": [ "components/*" ]
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -18,9 +29,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    // vite
+    "types": [ "vite/client" ]
+
   },
-  "include": [
-    "src"
-  ]
+  "include": [ "src" ]
 }

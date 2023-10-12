@@ -1,0 +1,38 @@
+@import "styles/forward.scss";
+
+.tooltip {
+  position: absolute;
+  top: -150%;
+  right: -420px;
+  z-index: 1;
+
+  width: 100%;
+
+  padding: $space-s $space-m;
+
+  transition: opacity 0.3s ease-in-out;
+  text-align: left;
+
+  @include glassmorphism();
+  text-shadow: 0 2px 20px $text-secondary;
+  background-color: #e5e5e5d2;
+
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+
+  &.active {
+    opacity: 1;
+  }
+
+  transform: translateX(-50%);
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: -7%;
+    transform: translate(7%, -50%);
+    content: "";
+    border: 10px solid transparent; /* Прозрачные границы */
+    border-right: 10px solid #e5e5e5d2; /* Добавляем треугольник */
+  }
+}

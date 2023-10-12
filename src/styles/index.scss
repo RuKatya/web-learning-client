@@ -1,0 +1,49 @@
+@import "./reset.scss";
+@import "./forward.scss";
+
+html,
+body,
+#root,
+.app,
+.container {
+  height: 100%;
+}
+
+html {
+  font-family: "Times New Roman", sans-serif;
+  font-size: 16px;
+  color: $text-primary;
+}
+
+body {
+  background-image: url("../assets/images/main-background.jpg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+// HOVER EFFECT
+a {
+  border: 1px solid transparent;
+
+  &:hover {
+    color: yellow;
+    // background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+//
+// ANIMATIONS
+//
+// @keyframes show {
+//     0% {
+//         opacity: 0;
+//     }
+//     100% {
+//         opacity: 1;
+//     }
+// }
+
+// MEDIA QUERYS
+// @media (max-width: 766px) {}
+// @media (min-width: 767px) and (max-width: 1199px) {}
+// @media (min-width: 1200px) {}
