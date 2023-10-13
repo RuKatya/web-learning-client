@@ -1,19 +1,12 @@
-import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Container from 'components/Container';
 import Header from 'components/Header';
 
-import { thunk } from 'store/auth/authReducer';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import useAuth from 'hooks/auth/useAuth';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.auth.user);
-
-  useEffect(() => {
-    dispatch(thunk.checkUserCookies(user));
-  }, []);
+  useAuth();
 
   return (
     <div className="app">

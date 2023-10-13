@@ -1,39 +1,16 @@
 import AuthForm from 'components/Forms/AuthForm/AuthForm';
-// import EyeButton from 'components/Input/EyeButton';
 
-import { IInputForm } from 'config/types';
+import { ROUTES } from 'config/routes';
 
-import useInput from 'hooks/useInput';
-import useSubmit, { DispatchFormEnum, LoginThunkResponse } from 'hooks/useSubmit';
-import { validateEmail, validatePassword } from 'utils/validate';
+import useLogin from 'hooks/auth/useLogin';
 
 const Login = () => {
-  const email = useInput('qweqwe@main.ru', validateEmail);
-  const password = useInput('qwe123!', validatePassword);
-  const { handleSubmit } = useSubmit<LoginThunkResponse>(DispatchFormEnum.LOGIN, {
-    email: email.value,
-    password: password.value,
-  });
-
-  const loginInputs: IInputForm[] = [
-    {
-      ...email,
-      name: 'email',
-      placeholder: 'Type email...',
-    },
-    {
-      ...password,
-      name: 'password',
-      type: 'password',
-      placeholder: 'Type password...',
-      // afterSlot: <EyeButton />,
-    },
-  ];
+  const { loginInputs, handleSubmit } = useLogin();
 
   return (
     <AuthForm
       title="Log In"
-      linkToBtn="registration-user"
+      linkToBtn={ROUTES.auth.saveUser.mask}
       buttonText="Sign In"
       inputs={loginInputs}
       handleSubmit={handleSubmit}

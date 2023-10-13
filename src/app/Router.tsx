@@ -10,7 +10,7 @@ import Login from './pages/Auth/components/Login';
 import Register from './pages/Auth/components/Register';
 import Dashboard from './pages/Dashboard';
 import Error404 from './pages/Error404';
-import FavoriteQuizes from './pages/FavoriteQuizes';
+import favQuizes from './pages/favQuizes';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile';
 import Statistic from './pages/Statistic';
@@ -47,7 +47,7 @@ const Router = () => {
             }
           />
           <Route
-            path={ROUTES.auth.regUser.mask}
+            path={ROUTES.auth.saveUser.mask}
             element={
               <AuthProtectedRoute userRole={userRole} userName={userName} redirectPath="/" isLogin={isLogin}>
                 <Register />
@@ -71,8 +71,8 @@ const Router = () => {
             </RoleProtectedRoute>
           }
         />
-        <Route path={ROUTES.userStatistic.mask} element={<Statistic />} />
-        <Route path={ROUTES.favoriteQuizes.mask} element={<FavoriteQuizes />} />
+        <Route path={ROUTES.statistic.mask} element={<Statistic />} />
+        <Route path={ROUTES.favQuizes.mask} element={<favQuizes />} />
         <Route path={ROUTES.error.mask} element={<Error404 />} />
       </Route>,
     ),

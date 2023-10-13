@@ -1,9 +1,9 @@
-const FavoriteQuizes = () => {
+const favQuizes = () => {
   return (
     <div>
-      <h1>FavoriteQuizes</h1>
+      <h1>favQuizes</h1>
     </div>
   );
 };
 
-export default FavoriteQuizes;
+export default favQuizes;

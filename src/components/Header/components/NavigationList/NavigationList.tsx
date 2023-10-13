@@ -31,38 +31,41 @@ const NavigationList = ({ toggleIsOpen }: NavigationListProps) => {
           <span className={css.navigation__label}>Home</span>
         </NavLink>
       </li>
+      {isLogin && (
+        <>
+          <li onClick={toggleIsOpen} className={css.navigation__item}>
+            <NavLink className={addActiveLinkClass} to={ROUTES.favQuizes.mask}>
+              <span className={css.navigation__label}>Fav Quizes</span>
+              <span className={css.navigation__favorite}>0</span>
+            </NavLink>
+          </li>
+          <li onClick={toggleIsOpen} className={css.navigation__item}>
+            <NavLink className={addActiveLinkClass} to={ROUTES.statistic.mask}>
+              <span className={css.navigation__label}>Statistics</span>
+            </NavLink>
+          </li>
 
-      <li onClick={toggleIsOpen} className={css.navigation__item}>
-        <NavLink className={addActiveLinkClass} to={ROUTES.favoriteQuizes.mask}>
-          <span className={css.navigation__label}>Fav Quizes</span>
-          <span className={css.navigation__favorite}>0</span>
-        </NavLink>
-      </li>
-      <li onClick={toggleIsOpen} className={css.navigation__item}>
-        <NavLink className={addActiveLinkClass} to={ROUTES.userStatistic.mask}>
-          <span className={css.navigation__label}>Statistics</span>
-        </NavLink>
-      </li>
+          {userRole === 'user' && (
+            <li onClick={toggleIsOpen} className={css.navigation__item}>
+              <NavLink className={addActiveLinkClass} to={ROUTES.profile.mask}>
+                <span className={css.navigation__label}>Profile</span>
+              </NavLink>
+            </li>
+          )}
 
-      {userRole === 'user' && (
-        <li onClick={toggleIsOpen} className={css.navigation__item}>
-          <NavLink className={addActiveLinkClass} to={ROUTES.profile.mask}>
-            <span className={css.navigation__label}>Profile</span>
-          </NavLink>
-        </li>
-      )}
-
-      {userRole === 'admin' && (
-        <li onClick={toggleIsOpen} className={css.navigation__item}>
-          <NavLink className={addActiveLinkClass} to={ROUTES.dashboard.mask}>
-            Dashboard
-          </NavLink>
-        </li>
+          {userRole === 'admin' && (
+            <li onClick={toggleIsOpen} className={css.navigation__item}>
+              <NavLink className={addActiveLinkClass} to={ROUTES.dashboard.mask}>
+                Dashboard
+              </NavLink>
+            </li>
+          )}
+        </>
       )}
 
       <li onClick={isLogin ? handleLogout : toggleIsOpen} className={css.navigation__item_login}>
         <NavLink className={addActiveLinkClass} to={ROUTES.auth.mask}>
-          <span className={css.navigation__label}>{isLogin ? `${userName}: Login Out` : 'Sign In'}</span>
+          <span className={css.navigation__label}>{isLogin ? 'Sign Out' : 'Sign In'}</span>
         </NavLink>
       </li>
     </ul>
