@@ -16,7 +16,7 @@ const useReg = () => {
     email: email.value,
     password: password.value,
     confirmPassword: confirmPassword.value,
-  }); // as RegThunkResponse
+  });
 
   const regInputs: IInputForm[] = [
     { ...userName, name: 'userName', placeholder: 'Type name...' },

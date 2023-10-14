@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { PropsWithChildren } from 'react';
 
-import Layer from 'components/Layout';
+import Layout from 'components/Layout';
 
 import css from './Burger.module.scss';
 
@@ -21,7 +21,9 @@ const Burger = ({ children, isOpen, toggleIsOpen }: BurgerProps) => {
         </div>
       </div>
 
-      <Layer isOpen={isOpen}>{children}</Layer>
+      <Layout toggleIsOpen={toggleIsOpen} isOpen={isOpen}>
+        {children}
+      </Layout>
     </div>
   );
 };

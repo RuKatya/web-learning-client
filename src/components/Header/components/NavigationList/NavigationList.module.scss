@@ -1,7 +1,8 @@
 @import "styles/forward.scss";
 
 .navigation__list {
-  @include flexbox(center, flex-end, 8px);
+  @include flexbox(center, center, 8px);
+  z-index: 2;
   flex: 1;
 }
 
@@ -37,8 +38,23 @@
 
 @media (max-width: 768px) {
   .navigation__list {
-    margin-top: 100px;
+    position: fixed;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
     flex-direction: column;
+
+    transform: translateY(-100vh);
+    opacity: 0;
+    transition:
+      transform 0.5s ease,
+      opacity 0.1s ease;
+
+    &.active {
+      transform: translateY(0vh);
+      opacity: 1;
+    }
   }
 
   .navigation__item,

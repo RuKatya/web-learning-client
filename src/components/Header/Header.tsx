@@ -16,15 +16,8 @@ const Header = () => {
 
   return (
     <header className={css.header}>
-      {isMobile ? (
-        <Burger isOpen={isOpen} toggleIsOpen={toggleIsOpen}>
-          <NavigationList toggleIsOpen={toggleIsOpen} />
-        </Burger>
-      ) : (
-        <nav className={css.navigation}>
-          <NavigationList />
-        </nav>
-      )}
+      {isMobile && <Burger isOpen={isOpen} toggleIsOpen={toggleIsOpen} />}
+      <NavigationList isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
     </header>
   );
 };

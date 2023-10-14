@@ -4,11 +4,16 @@ import css from './Layout.module.scss';
 
 type LayoutProps = {
   isOpen: boolean;
+  toggleIsOpen: () => void;
 } & PropsWithChildren;
 
-const Layout = ({ children, isOpen }: LayoutProps) => {
+const Layout = ({ children, isOpen, toggleIsOpen }: LayoutProps) => {
   const cnLayoutButton = classnames(css.layout, isOpen && css.open);
 
-  return <div className={cnLayoutButton}>{children}</div>;
+  return (
+    <div onClick={toggleIsOpen} className={cnLayoutButton}>
+      {children}
+    </div>
+  );
 };
 export default Layout;
