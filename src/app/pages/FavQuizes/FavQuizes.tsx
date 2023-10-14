@@ -1,4 +1,4 @@
-const favQuizes = () => {
+const FavQuizes = () => {
   return (
     <div>
       <h1>FavQuizes</h1>
@@ -6,4 +6,4 @@ const favQuizes = () => {
   );
 };
 
-export default favQuizes;
+export default FavQuizes;

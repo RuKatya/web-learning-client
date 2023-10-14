@@ -1,1 +1,1 @@
-export { default } from './favQuizes';
+export { default } from './FavQuizes';
