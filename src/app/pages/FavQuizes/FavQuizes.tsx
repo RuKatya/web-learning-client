@@ -1,7 +1,7 @@
 const favQuizes = () => {
   return (
     <div>
-      <h1>favQuizes</h1>
+      <h1>FavQuizes</h1>
     </div>
   );
 };

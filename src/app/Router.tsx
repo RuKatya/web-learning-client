@@ -10,7 +10,7 @@ import Login from './pages/Auth/components/Login';
 import Register from './pages/Auth/components/Register';
 import Dashboard from './pages/Dashboard';
 import Error404 from './pages/Error404';
-import favQuizes from './pages/favQuizes';
+import FavQuizes from './pages/FavQuizes';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile';
 import Statistic from './pages/Statistic';
@@ -72,7 +72,7 @@ const Router = () => {
           }
         />
         <Route path={ROUTES.statistic.mask} element={<Statistic />} />
-        <Route path={ROUTES.favQuizes.mask} element={<favQuizes />} />
+        <Route path={ROUTES.favQuizes.mask} element={<FavQuizes />} />
         <Route path={ROUTES.error.mask} element={<Error404 />} />
       </Route>,
     ),
