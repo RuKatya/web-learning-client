@@ -24,6 +24,7 @@ export default defineConfig({
       config: path.resolve(srcPath, './config'),
       styles: path.resolve(srcPath, './styles'),
       assets: path.resolve(srcPath, './assets'),
+      providers: path.resolve(srcPath, './providers'),
       components: path.resolve(srcPath, './components'),
     },
   },

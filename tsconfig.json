@@ -9,6 +9,7 @@
       "config": [ "config/*" ],
       "assets": [ "assets/*" ],
       "styles": [ "styles/*" ],
+      "providers": [ "providers/*" ],
       "components": [ "components/*" ]
     },
     "target": "es5",

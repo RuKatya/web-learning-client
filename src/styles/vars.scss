@@ -12,20 +12,20 @@ $space-xxs: 4px;
 $header-height: 80px;
 
 // TEXT-COLOR
-$text-primary: white;
-$text-secondary: black;
-$text-decoration: rgb(25, 151, 25);
-$text-red: rgb(255, 0, 0, 0.8);
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-decoration: var(--text-decoration);
+$text-red: var(--text-red);
 
 // BACKGROUND-COLOR
-$background-primary: black;
-$background-primary-inverted: white;
-$background-secondary: green;
-$background-secondary-inverted: rgb(202, 128, 236);
+$background-primary: var(--background-primary);
+$background-primary-inverted: var(--background-primary-inverted);
+$background-secondary: var(--background-secondary);
+$background-secondary-inverted: var(--background-primary-inverted);
 
 // GLASS
-$glass0: rgba(255, 255, 255, 1);
-$glass1: rgba(255, 255, 255, 0.8);
-$glass2: rgba(255, 255, 255, 0.6);
-$glass3: rgba(255, 255, 255, 0.4);
-$glass4: rgba(255, 255, 255, 0.2);
+$glass0: var(--glass0);
+$glass1: var(--glass1);
+$glass2: var(--glass2);
+$glass3: var(--glass3);
+$glass4: var(--glass4);
