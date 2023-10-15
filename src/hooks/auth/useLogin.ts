@@ -5,7 +5,7 @@ import useSubmit, { DispatchFormEnum, LoginThunkResponse } from 'hooks/useSubmit
 import { validateEmail, validatePassword } from 'utils/validate';
 
 const useLogin = () => {
-  const email = useInput('qweqwe@main.ru', validateEmail);
+  const email = useInput('admin@mail.ru', validateEmail);
   const password = useInput('qwe123!', validatePassword);
 
   const { handleSubmit } = useSubmit<LoginThunkResponse>(DispatchFormEnum.LOGIN, {

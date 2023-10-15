@@ -22,25 +22,26 @@
 
 .error {
   margin-bottom: $space-m;
-  transform: translateY(0px);
 
-  opacity: 1;
+  transform: translateY(-20px);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
   transition: all 0.2s ease-in-out;
-
   color: $text-red;
 
-  visibility: visible;
-  pointer-events: visible;
+  &.active {
+    transform: translateY(10px);
 
-  &.hidden {
-    transform: translateY(-20px);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
+    opacity: 1;
     transition: all 0.2s ease-in-out;
+
     color: $text-red;
+
+    visibility: visible;
+    pointer-events: visible;
   }
 }
 
