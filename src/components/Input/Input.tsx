@@ -57,7 +57,7 @@ const Input = ({
   const isNamePassword = name === 'password';
   const inputType = isVisible ? 'text' : type;
 
-  const cnError = classnames(css.error, error && css.hidden);
+  const cnError = classnames(css.error, error && css.active);
 
   return (
     <>
