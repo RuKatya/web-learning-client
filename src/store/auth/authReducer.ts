@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { IAuthState } from '../types';
+
 import { regThunk, loginThunk, loginOutThunk, checkUserCookies } from './authAPI';
-import { IAuthState } from './types';
 
 const initialState = {
   user: {

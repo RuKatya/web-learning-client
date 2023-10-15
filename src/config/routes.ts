@@ -18,13 +18,16 @@ export const ROUTES = {
     },
   },
   profile: {
-    mask: 'user-profile',
+    mask: '/user-profile',
   },
   dashboard: {
-    mask: 'admin-dashboard',
+    mask: '/dashboard',
+    subjects: {
+      mask: '/dashboard/subjects/get-all-subjects',
+    },
   },
   favQuizes: {
-    mask: 'user-save-quizes',
+    mask: 'save-user-quizes',
   },
   statistic: {
     mask: 'user-statistic',
