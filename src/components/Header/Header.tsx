@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+// import Layout from 'components/Layout';
 import useMatchMedia from 'hooks/useMatchMedia';
 
 import Burger from './components/Burger';
@@ -16,15 +17,9 @@ const Header = () => {
 
   return (
     <header className={css.header}>
-      {isMobile ? (
-        <Burger isOpen={isOpen} toggleIsOpen={toggleIsOpen}>
-          <NavigationList toggleIsOpen={toggleIsOpen} />
-        </Burger>
-      ) : (
-        <nav className={css.navigation}>
-          <NavigationList />
-        </nav>
-      )}
+      {isMobile && <Burger isOpen={isOpen} toggleIsOpen={toggleIsOpen} />}
+      <NavigationList isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
+      {/* <Layout toggleIsOpen={toggleIsOpen} isOpen={isOpen}></Layout> */}
     </header>
   );
 };

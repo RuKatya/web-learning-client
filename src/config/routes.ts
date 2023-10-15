@@ -7,17 +7,14 @@ export const ROUTES = {
     saveUser: {
       mask: '/auth/save-user',
     },
-    regUser: {
-      mask: '/auth/registration-user',
-    },
     loginUser: {
       mask: '/auth/login-user',
     },
     logoutUser: {
-      mask: '/auth/user-logout',
+      mask: '/auth/logout-user',
     },
-    userChecking: {
-      mask: '/auth/user-checking',
+    checkUser: {
+      mask: '/auth/check-user',
     },
   },
   profile: {
@@ -26,10 +23,10 @@ export const ROUTES = {
   dashboard: {
     mask: 'admin-dashboard',
   },
-  favoriteQuizes: {
+  favQuizes: {
     mask: 'user-save-quizes',
   },
-  userStatistic: {
+  statistic: {
     mask: 'user-statistic',
   },
   error: {

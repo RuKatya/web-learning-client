@@ -13,9 +13,9 @@ type RejectValue = {
 // try: Вынести функции в одну
 
 export const regThunk = createAsyncThunk<ResponseRegistration, RegThunkResponse, RejectValue>(
-  ROUTES.auth.regUser.mask,
+  ROUTES.auth.saveUser.mask,
   async (state, { rejectWithValue }) => {
-    return await postData<RegThunkResponse, ResponseRegistration>(ROUTES.auth.regUser.mask, { ...state })
+    return await postData<RegThunkResponse, ResponseRegistration>(ROUTES.auth.saveUser.mask, { ...state })
       .then((data) => {
         return data;
       })
@@ -52,9 +52,9 @@ export const loginOutThunk = createAsyncThunk<ResponseLogout, undefined, RejectV
 );
 
 export const checkUserCookies = createAsyncThunk<ResponseLogin, unknown, RejectValue>(
-  ROUTES.auth.userChecking.mask,
+  ROUTES.auth.checkUser.mask,
   async (__, { rejectWithValue }) => {
-    return await getData<ResponseLogin>(ROUTES.auth.userChecking.mask)
+    return await getData<ResponseLogin>(ROUTES.auth.checkUser.mask)
       .then((data) => {
         return data;
       })

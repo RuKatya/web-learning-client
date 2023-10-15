@@ -1,14 +1,14 @@
 import classnames from 'classnames';
-import { PropsWithChildren } from 'react';
 import css from './Layout.module.scss';
 
 type LayoutProps = {
   isOpen: boolean;
-} & PropsWithChildren;
+  toggleIsOpen: () => void;
+};
 
-const Layout = ({ children, isOpen }: LayoutProps) => {
+const Layout = ({ isOpen, toggleIsOpen }: LayoutProps) => {
   const cnLayoutButton = classnames(css.layout, isOpen && css.open);
 
-  return <div className={cnLayoutButton}>{children}</div>;
+  return <div onClick={toggleIsOpen} className={cnLayoutButton} />;
 };
 export default Layout;

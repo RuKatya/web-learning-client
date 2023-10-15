@@ -1,16 +1,15 @@
 import classnames from 'classnames';
-import { PropsWithChildren } from 'react';
 
-import Layer from 'components/Layout';
+import Layout from 'components/Layout';
 
 import css from './Burger.module.scss';
 
 type BurgerProps = {
   isOpen: boolean;
   toggleIsOpen: () => void;
-} & PropsWithChildren;
+};
 
-const Burger = ({ children, isOpen, toggleIsOpen }: BurgerProps) => {
+const Burger = ({ isOpen, toggleIsOpen }: BurgerProps) => {
   const cnBurgerButton = classnames(css.burger__button, isOpen && css.open);
 
   return (
@@ -21,7 +20,7 @@ const Burger = ({ children, isOpen, toggleIsOpen }: BurgerProps) => {
         </div>
       </div>
 
-      <Layer isOpen={isOpen}>{children}</Layer>
+      <Layout toggleIsOpen={toggleIsOpen} isOpen={isOpen} />
     </div>
   );
 };
