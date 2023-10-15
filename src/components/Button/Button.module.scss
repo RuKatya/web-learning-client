@@ -1,22 +1,35 @@
 .button {
-    display: block;
-    border-radius: 4px;
-    &.s {
-        height: 30px;
-        width: 70px;
-    }
-    &.m {
-        height: 40px;
-        width: 90px;
-    }
-    &.l {
-        height: 50px;
-        width: 110px;
-    }
-    &.right {
-        margin-left: auto;
-    }
-    &.center {
-        margin: 0 auto;
-    }
+  display: block;
+  border-radius: 4px;
+
+  &.xs {
+    height: 20px;
+    width: 50px;
+  }
+  &.s {
+    height: 30px;
+    width: 70px;
+  }
+  &.m {
+    height: 40px;
+    width: 90px;
+  }
+  &.l {
+    height: 50px;
+    width: 110px;
+  }
+  &.xl {
+    height: 70px;
+    width: 130px;
+  }
+
+  &.left {
+    margin-right: auto;
+  }
+  &.center {
+    margin: 0 auto;
+  }
+  &.right {
+    margin-left: auto;
+  }
 }

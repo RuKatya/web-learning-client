@@ -18,7 +18,7 @@ $lineHeightCalcValue: 1.5;
   border-radius: $borderRadius;
 }
 
-@mixin glassmorphism($bakgroundColor: rgba(255, 255, 255, 0.2)) {
+@mixin glassmorphism($bakgroundColor: var(--glass4)) {
   background: $bakgroundColor;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;

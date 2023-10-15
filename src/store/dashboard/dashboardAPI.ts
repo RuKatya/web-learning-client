@@ -9,6 +9,7 @@ type RejectValue = {
 };
 
 // Разобраться с танком когда не надо передавать аргумент
+// Показать ошибку?
 
 export const subjectsThunk = createAsyncThunk<ResponseSubjects, unknown, RejectValue>(
   ROUTES.dashboard.subjects.mask,

@@ -1,7 +1,7 @@
 import { FC, FormEvent, useEffect } from 'react';
-import { Form, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import Button, { ButtonPositionEnum, ButtonSizeEnum } from 'components/Button';
+import Button from 'components/Button';
 import StatusMessage from 'components/Forms/StatusMessage';
 import Input from 'components/Input';
 
@@ -66,8 +66,8 @@ const AuthForm: FC<IAuthFormProps> = ({
         type="submit"
         borderWidth={2}
         borderColor="green"
-        size={ButtonSizeEnum.MEDIUM}
-        position={ButtonPositionEnum.CENTER}
+        size="m"
+        position="center"
         style={{ marginBottom: 10 }}
         spinnerWidth={20}
         spinnerHeight={20}
