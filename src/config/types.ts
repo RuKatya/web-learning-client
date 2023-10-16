@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent, InputHTMLAttributes, ReactNode } from 'react';
-import { UserRole, Subject } from 'store/types';
+import { UserRole, SubjectModel, Subject } from 'store/types';
 
 export interface ResponseRegistration {
   message: string;
@@ -10,8 +10,14 @@ export interface ResponseLogout {
   isLogin: boolean;
   continueWork: boolean;
 }
+
 export interface ResponseSubjects {
   subjects: Subject[];
+  continueWork: boolean;
+}
+
+export interface ResponseSubjectsModel {
+  subjects: SubjectModel[];
   continueWork: boolean;
 }
 

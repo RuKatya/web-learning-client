@@ -24,6 +24,17 @@ export const ROUTES = {
     mask: '/dashboard',
     subjects: {
       mask: '/dashboard/subjects/get-all-subjects',
+      addSubject: {
+        mask: '/dashboard/subjects/save-new-subject',
+      },
+      deleteSubject: {
+        mask: '/dashboard/subjects/delete-subject',
+        // .delete('/delete-subject', removeSubject);  // Remove Subject
+      },
+      refreshSubject: {
+        mask: '/dashboard/subjects/update-subject',
+        // .patch('/update-subject', updateSubject);
+      },
     },
   },
   favQuizes: {

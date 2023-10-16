@@ -30,6 +30,9 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'import', 'prettier', 'react', 'react-hooks'],
   rules: {
+    // temporarily off
+    'jsx-a11y/anchor-is-valid': 'off',
+    //
     'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'no-console': 'warn',

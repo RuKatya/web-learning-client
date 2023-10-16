@@ -1,15 +1,12 @@
 import { useEffect } from 'react';
 
 import { thunk } from 'store/dashboard/dashboardReducer';
-// import { dashboardSubjects } from 'store/dashboard/selectors';
-import {
-  useAppDispatch,
-  // useAppSelector
-} from 'store/hooks';
+import { useAppDispatch } from 'store/hooks';
+
+import SubjectList from './components/SubjectList';
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
-  // const subjects = useAppSelector(dashboardSubjects);
 
   useEffect(() => {
     dispatch(thunk.subjectsThunk(''));
@@ -18,6 +15,8 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
+
+      <SubjectList />
     </div>
   );
 };

@@ -4,11 +4,16 @@ export type Subjects = 'CSS' | 'HTML' | 'JavaScript';
 
 export type Subject = {
   SubjectID: number;
-  SubjectName: Subject;
+  SubjectName: string;
+};
+
+export type SubjectModel = {
+  subjectID: number;
+  subjectName: string;
 };
 
 export type SubjectsState = {
-  subjects: Subject[];
+  subjects: SubjectModel[];
   status: Status;
   message: string;
   continueWork: boolean;

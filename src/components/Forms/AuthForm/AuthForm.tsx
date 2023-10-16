@@ -64,8 +64,6 @@ const AuthForm: FC<IAuthFormProps> = ({
 
       <Button
         type="submit"
-        borderWidth={2}
-        borderColor="green"
         size="m"
         position="center"
         style={{ marginBottom: 10 }}

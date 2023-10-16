@@ -8,8 +8,6 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
   position: ButtonPosition;
   isLoading?: boolean;
-  borderColor?: string;
-  borderWidth?: number;
   spinnerWidth?: number;
   spinnerHeight?: number;
 }
