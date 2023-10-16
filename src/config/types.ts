@@ -27,7 +27,7 @@ export interface ResponseLogin extends ResponseRegistration {
   isLogin: boolean;
 }
 
-export interface IInputForm extends InputHTMLAttributes<HTMLInputElement> {
+export interface FormInputT extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
   error: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;

@@ -43,6 +43,7 @@
     &__input {
       padding: $space-s $space-l;
       border-radius: 8px;
+
       background-color: red;
     }
     &__btn {
@@ -50,11 +51,37 @@
       font-size: 20px;
       padding: $space-s $space-l;
 
-      //
       border: 1px solid red;
-      //
     }
   }
   .subject__input_add {
+  }
+
+  .modal__content {
+    @include flexbox(center, center);
+    flex-direction: column;
+    text-align: center;
+
+    height: 250px;
+    padding: $space-m $space-xxl;
+
+    @include glassmorphism();
+
+    .modal__question {
+      font-size: 30px;
+    }
+
+    .modal__btns {
+      @include flexbox(center, center, $space-m);
+      margin-top: $space-l;
+
+      font-size: 24px;
+
+      .modal__btn:hover {
+        @include glassmorphism();
+      }
+    }
+    .modal__input {
+    }
   }
 }

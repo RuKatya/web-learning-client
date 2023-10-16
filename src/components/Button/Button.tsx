@@ -7,6 +7,7 @@ import css from './Button.module.scss';
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size: ButtonSize;
   position: ButtonPosition;
+  className?: string;
   isLoading?: boolean;
   spinnerWidth?: number;
   spinnerHeight?: number;
@@ -20,9 +21,10 @@ const Button = ({
   isLoading = false,
   spinnerWidth,
   spinnerHeight,
+  className,
   ...props
 }: IButtonProps) => {
-  const cnButton = classnames(css.button, css[size], css[position]);
+  const cnButton = classnames(css.button, className && className, css[size], css[position]);
 
   return (
     <button disabled={isLoading} style={style} className={cnButton} {...props}>

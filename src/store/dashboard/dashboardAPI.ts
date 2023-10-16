@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ROUTES } from 'config/routes';
 import { ResponseSubjects, ResponseSubjectsModel } from 'config/types';
-
 import { getData, postData, deleteData } from 'utils/fetchData';
+import { ResponseAddSubjectModel, ResponseAddSubject } from '../types';
 
 type RejectValue = {
   rejectValue: string;
@@ -31,19 +31,6 @@ export const subjectsThunk = createAsyncThunk<ResponseSubjectsModel, unknown, Re
   },
 );
 
-type ResponseAddSubject = {
-  continueWork: boolean;
-  message: string;
-  SubjectID: number;
-  newName: string;
-};
-type ResponseAddSubjectModel = {
-  continueWork: boolean;
-  message: string;
-  subjectID: number;
-  subjectName: string;
-};
-
 const normalizeSubjectsAddData = (from: ResponseAddSubject): ResponseAddSubjectModel => {
   return {
     continueWork: from.continueWork,
@@ -71,6 +58,7 @@ export const subjectsAddThunk = createAsyncThunk<ResponseAddSubjectModel, string
 export const subjectsDeleteThunk = createAsyncThunk<ResponseSubjects, number, RejectValue>(
   ROUTES.dashboard.subjects.deleteSubject.mask,
   async (state, { rejectWithValue }) => {
+    console.log('123123123');
     return await deleteData<{ id: number }, ResponseSubjects>(ROUTES.dashboard.subjects.deleteSubject.mask, {
       id: state,
     })

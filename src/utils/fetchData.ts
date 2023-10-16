@@ -32,9 +32,16 @@ export async function postData<T, K>(url: string, body: T): Promise<K> {
 }
 
 export async function deleteData<T, K>(url: string, body: T): Promise<K> {
-  return await axios
-    // .delete<K>(API_BASE_URL + url, { data: { body }, headers: config })
-    .delete<K>(API_BASE_URL + url, body)
+  const c = {
+    method: 'delete',
+    url: API_BASE_URL + url,
+    data: body,
+    headers: {
+      ...config,
+    },
+  };
+
+  return await axios<K>(c)
     .then(({ data }) => {
       return data;
     })

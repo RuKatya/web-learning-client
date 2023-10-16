@@ -31,3 +31,17 @@ export interface IAuthState {
   message: string;
   continueWork: boolean;
 }
+
+export type ResponseAddSubject = {
+  continueWork: boolean;
+  message: string;
+  SubjectID: number;
+  newName: string;
+};
+
+export type ResponseAddSubjectModel = {
+  continueWork: boolean;
+  message: string;
+  subjectID: number;
+  subjectName: string;
+};

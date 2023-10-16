@@ -1,7 +1,7 @@
 import EyeIconClosed from 'assets/images/icons/EyeIconClosed';
 import EyeIconOpened from 'assets/images/icons/EyeIconOpened';
 
-import css from './Input.module.scss';
+import css from './FormInput.module.scss';
 
 interface EyeButtonProps {
   width: number;

@@ -3,27 +3,20 @@ import { useState } from 'react';
 
 import Tooltip from 'components/Tooltip';
 
-import { IInputForm } from 'config/types';
+import { FormInputT } from 'config/types';
 
 import EyeButton from './EyeButton';
 
-import css from './Input.module.scss';
+import { requirements } from './config';
+
+import css from './FormInput.module.scss';
 
 export enum InputType {
   TEXT = 'text',
   PASSWORD = 'password',
 }
 
-const requirements = [
-  { label: 'Password must be minimum 6 symbols' },
-  { label: 'Password must be only En' },
-  { label: 'Password must be without spaces' },
-  { label: 'Password must include numbers' },
-  { label: 'Password must include letters' },
-  { label: 'Password must include one character like !@#$%^&amp;' },
-];
-
-const Input = ({
+const FormInput = ({
   name,
   type = 'text',
   error,
@@ -31,8 +24,7 @@ const Input = ({
   placeholder = 'Type here...',
   handleFocus,
   handleChange,
-  afterSlot,
-}: IInputForm) => {
+}: FormInputT) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isHover, setIsHover] = useState<boolean>(false);
 
@@ -87,4 +79,4 @@ const Input = ({
     </>
   );
 };
-export default Input;
+export default FormInput;
