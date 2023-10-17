@@ -19,4 +19,7 @@
 
     transition: all 0.3s ease;
   }
+  &:focus {
+    border: 5px solid red;
+  }
 }

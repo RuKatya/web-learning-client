@@ -10,8 +10,15 @@ type LayoutProps = {
 const Layout = ({ isOpen, toggleIsOpen, children }: LayoutProps) => {
   const cnLayoutButton = classnames(css.layout, isOpen && css.open);
 
+  const handle = (e: MouseEvent<HTMLInputElement>) => {
+    const elem = e.target as Element;
+    if (elem.classList.contains(css.layout)) {
+      toggleIsOpen && toggleIsOpen(e);
+    }
+  };
+
   return (
-    <div onClick={toggleIsOpen} className={cnLayoutButton}>
+    <div onClick={handle} className={cnLayoutButton}>
       {children}
     </div>
   );

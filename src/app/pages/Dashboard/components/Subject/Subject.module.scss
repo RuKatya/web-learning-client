@@ -1,0 +1,30 @@
+@import "styles/forward.scss";
+
+.subject__item {
+  border: 2px solid black;
+  display: flex;
+  gap: $space-l;
+  .subject__link {
+    display: inline-block;
+    padding: $space-s $space-l;
+
+    font-size: 30px;
+    color: black;
+    background-color: red;
+
+    // .subject__name {
+    // }
+  }
+  .subject__add,
+  .subject__refresh,
+  .subject__delete {
+    font-size: 20px;
+    padding: $space-s $space-l;
+    border: 1px solid red;
+  }
+
+  // .subject__refresh {
+  // }
+  // .subject__delete {
+  // }
+}

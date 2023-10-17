@@ -1,23 +1,30 @@
-import { ChangeEvent, MouseEvent, useCallback, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
+// import { Link } from 'react-router-dom';
 
-import Button from 'components/Button';
 import Layout from 'components/Layout';
+import Modal from 'components/Modal';
 
-import { auth } from 'store/auth/selectors';
 import { thunk } from 'store/dashboard/dashboardReducer';
 import { dashboardSubjects } from 'store/dashboard/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { SubjectModel } from 'store/types';
 
+import Subject from '../Subject';
+
 import css from './SubjectList.module.scss';
 
 const SubjectList = () => {
+  const addInputRef = useRef<HTMLInputElement | null>(null);
   const subjects = useAppSelector(dashboardSubjects);
-  const user = useAppSelector(auth);
   const dispatch = useAppDispatch();
 
-  const addInputRef = useRef<HTMLInputElement | null>(null);
+  const [inputState, setInputState] = useState({ value: '', error: '' });
+
+  const [subjectToDelete, setSubjectToDelete] = useState<SubjectModel | null>(null);
+  const [modals, setModals] = useState({
+    confirmModal: false,
+    refuseModal: false,
+  });
 
   // const handleRefresh = () => {
   // console.log('refreshed');
@@ -30,131 +37,87 @@ const SubjectList = () => {
     }
   };
 
-  const handleDelete = (id: number) => {
-    console.log('SUBJECT LIST: ', user, id);
-    dispatch(thunk.subjectsDeleteThunk(id));
+  const handleDelete = (subject: SubjectModel) => {
+    console.log('SUBJECT LIST: ', subject.subjectID);
+    setModals((prev) => ({ ...prev, confirmModal: true }));
+    setSubjectToDelete(subject);
   };
-
-  const [modal1, setModal1] = useState(false);
-  const [value, setValue] = useState('333');
-  const [error, setError] = useState('');
-  const [modal2, setModal2] = useState(false);
-  const [subjectToDelete, setSubjectToDelete] = useState<SubjectModel | null>(null);
-  const [confirmationToDelete, setConfirmationToDelete] = useState(false);
-
-  const toggleModal1 = useCallback((event: MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-    setModal1((prev) => !prev);
-  }, []);
-  const toggleModal2 = useCallback(() => {
-    setModal2((prev) => !prev);
-  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    setInputState((prev) => ({ ...prev, value: event.target.value }));
   };
 
-  const checkWord = () => {
-    if (subjectToDelete) {
-      if (value !== subjectToDelete?.subjectName) {
-        setError('Error: typed not the same');
-      } else {
-        handleDelete(subjectToDelete.subjectID);
+  // 1
+  const handleRefuse = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setModals((prev) => ({ ...prev, confirmModal: false }));
+  };
+
+  const handleConfirm = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setModals((prev) => ({ ...prev, confirmModal: false }));
+    setTimeout(() => {
+      setModals((prev) => ({ ...prev, refuseModal: true }));
+    }, 200);
+  };
+
+  // 2
+  const handleValidateName = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (inputState.value !== subjectToDelete?.subjectName) {
+      setInputState((prev) => ({ ...prev, error: 'Error: values not the same' }));
+    } else {
+      dispatch(thunk.subjectsDeleteThunk(subjectToDelete.subjectID));
+      setTimeout(() => {
         handleClearData();
-      }
+      }, 200);
     }
   };
 
   const handleClearData = () => {
-    setError('');
-    setValue('');
-    setModal1(false);
-    setModal2(false);
     setSubjectToDelete(null);
-    setConfirmationToDelete(false);
+    setInputState({ error: '', value: '' });
+    setModals({ confirmModal: false, refuseModal: false });
   };
 
   return (
     <div className={css.subject}>
       <ul className={css.subject__list}>
-        {subjects.map((subject) => (
-          <li key={subject.subjectID} id={String(subject.subjectID)} className={css.subject__item}>
-            <Link to="#" className={css.subject__link}>
-              <h2 className={css.subject__name}>{subject.subjectName}</h2>
-            </Link>
-            <button
-              //  onClick={handleDelete(el.subjectID)}
-              onClick={() => {
-                setModal1(true);
-                setSubjectToDelete(subject);
-              }}
-              className={css.subject__delete}
-            >
-              DELETE
-            </button>
-          </li>
-        ))}
+        {subjects.length > 0 &&
+          subjects.map((subject) => (
+            <Subject
+              handleDelete={() => handleDelete(subject)}
+              key={subject.subjectID}
+              subjectID={subject.subjectID}
+              subjectName={subject.subjectName}
+            />
+          ))}
       </ul>
+      <Layout isOpen={modals.confirmModal} toggleIsOpen={handleClearData}>
+        <Modal
+          isActive={modals.confirmModal}
+          label="Are you sure want to delete the subject?"
+          acceptLabel="Yes"
+          refuseLabel="No"
+          acceptOnClick={handleConfirm}
+          refuseOnClick={handleRefuse}
+        />
+      </Layout>
 
-      {!confirmationToDelete && (
-        <Layout isOpen={modal1} toggleIsOpen={toggleModal1}>
-          <div className={css.modal__content}>
-            <div className={css.modal__question}>Are you sure want to delete the subject?</div>
-            <div className={css.modal__btns}>
-              <Button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setConfirmationToDelete(true);
-                  setModal1(false);
-                  setTimeout(() => {
-                    setModal2(true);
-                  }, 200);
-                }}
-                size="m"
-                position="center"
-                className={css.modal__btn}
-              >
-                Yes
-              </Button>
-              <Button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  setModal1(false);
-                }}
-                className={css.modal__btn}
-                position="center"
-                size="m"
-              >
-                No
-              </Button>
-            </div>
-          </div>
-        </Layout>
-      )}
-
-      {confirmationToDelete && (
-        <Layout isOpen={modal2}>
-          <div className={css.modal__content}>
-            <div className={css.modal__question}>
-              To delete the subject, please write {subjectToDelete?.subjectName}
-            </div>
-            <input value={value} onChange={handleChange} className={css.modal__input} />
-            {error && <div>{error}</div>}
-            <div className={css.modal__btns}>
-              <Button onClick={() => checkWord()} className={css.modal__btn} position="center" size="m">
-                Yes
-              </Button>
-              <Button onClick={() => handleClearData()} className={css.modal__btn} position="center" size="m">
-                No
-              </Button>
-            </div>
-          </div>
-        </Layout>
-      )}
-
-      {/* <button onClick={handleRefresh} className={css.subject__refresh}> </button>
-          REFRESH*/}
-
+      <Layout isOpen={modals.refuseModal} toggleIsOpen={handleClearData}>
+        <Modal
+          isActive={modals.refuseModal}
+          label={`To delete the subject, please write ${subjectToDelete?.subjectName}?`}
+          acceptLabel="Yes"
+          refuseLabel="No"
+          refuseOnClick={handleClearData}
+          acceptOnClick={handleValidateName}
+          hasInput={true}
+          value={inputState.value}
+          error={inputState.error}
+          onChangeInput={handleChange}
+        />
+      </Layout>
       <div className={css.subject__add}>
         <input className={css.subject__add__input} ref={addInputRef} type="text" />
         <button className={css.subject__add__btn} onClick={handleAdd}>
