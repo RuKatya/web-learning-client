@@ -7,8 +7,8 @@ import css from './Modal.module.scss';
 
 type ModalProps = {
   label: string;
-  acceptLabel: string;
-  refuseLabel: string;
+  acceptLabel?: string;
+  refuseLabel?: string;
   acceptOnClick: (event: MouseEvent<HTMLButtonElement>) => void;
   refuseOnClick: (event: MouseEvent<HTMLButtonElement>) => void;
   value?: string;
@@ -21,8 +21,8 @@ type ModalProps = {
 const Modal = ({
   isActive,
   label,
-  acceptLabel,
-  refuseLabel,
+  acceptLabel = 'Yes',
+  refuseLabel = 'No',
   value,
   error,
   hasInput,

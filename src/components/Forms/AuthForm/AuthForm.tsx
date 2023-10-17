@@ -2,7 +2,7 @@ import { FC, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Button from 'components/Button';
-import FormInput from 'components/FormInput';
+import FormInput from 'components/Forms/FormInput';
 import StatusMessage from 'components/Forms/StatusMessage';
 
 import { clearMessageContinueWork } from 'store/auth/authReducer';

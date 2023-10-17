@@ -1,8 +1,8 @@
-import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
 import Layout from 'components/Layout';
 import Modal from 'components/Modal';
+import useModals from 'hooks/dashboard/useModals';
 
 import { thunk } from 'store/dashboard/dashboardReducer';
 import { dashboardSubjects } from 'store/dashboard/selectors';
@@ -14,22 +14,10 @@ import Subject from '../Subject';
 import css from './SubjectList.module.scss';
 
 const SubjectList = () => {
-  const addInputRef = useRef<HTMLInputElement | null>(null);
   const subjects = useAppSelector(dashboardSubjects);
   const dispatch = useAppDispatch();
 
-  const [inputState, setInputState] = useState({ value: '', error: '' });
-
-  const [subjectToDelete, setSubjectToDelete] = useState<SubjectModel | null>(null);
-  const [modals, setModals] = useState({
-    confirmModal: false,
-    refuseModal: false,
-  });
-
-  // const handleRefresh = () => {
-  // console.log('refreshed');
-  // dispatch(thunk.subjectsRefreshThunk(addRef.current.value));
-  // };
+  const addInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleAdd = () => {
     if (addInputRef?.current?.value) {
@@ -37,48 +25,23 @@ const SubjectList = () => {
     }
   };
 
-  const handleDelete = (subject: SubjectModel) => {
-    console.log('SUBJECT LIST: ', subject.subjectID);
-    setModals((prev) => ({ ...prev, confirmModal: true }));
-    setSubjectToDelete(subject);
-  };
+  const {
+    modals,
+    inputState,
+    subjectToDelete,
+    handleRefuse,
+    handleDelete,
+    handleChange,
+    handleConfirm,
+    handleClearData,
+    handleValidateName,
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputState((prev) => ({ ...prev, value: event.target.value }));
-  };
-
-  // 1
-  const handleRefuse = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setModals((prev) => ({ ...prev, confirmModal: false }));
-  };
-
-  const handleConfirm = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setModals((prev) => ({ ...prev, confirmModal: false }));
-    setTimeout(() => {
-      setModals((prev) => ({ ...prev, refuseModal: true }));
-    }, 200);
-  };
-
-  // 2
-  const handleValidateName = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    if (inputState.value !== subjectToDelete?.subjectName) {
-      setInputState((prev) => ({ ...prev, error: 'Error: values not the same' }));
-    } else {
-      dispatch(thunk.subjectsDeleteThunk(subjectToDelete.subjectID));
-      setTimeout(() => {
-        handleClearData();
-      }, 200);
-    }
-  };
-
-  const handleClearData = () => {
-    setSubjectToDelete(null);
-    setInputState({ error: '', value: '' });
-    setModals({ confirmModal: false, refuseModal: false });
-  };
+    editRef,
+    isEditInputVisible,
+    handleRefresh,
+    handleEditClose,
+    handleUpdateSubject,
+  } = useModals();
 
   return (
     <div className={css.subject}>
@@ -86,30 +49,32 @@ const SubjectList = () => {
         {subjects.length > 0 &&
           subjects.map((subject) => (
             <Subject
-              handleDelete={() => handleDelete(subject)}
+              handleEditClose={handleEditClose}
+              ref={editRef}
               key={subject.subjectID}
               subjectID={subject.subjectID}
               subjectName={subject.subjectName}
+              handleDelete={() => handleDelete(subject)}
+              handleRefresh={() => handleRefresh(subject)}
+              handleUpdateSubject={
+                isEditInputVisible && subject.subjectID === subjectToDelete?.subjectID ? handleUpdateSubject : undefined
+              }
             />
           ))}
       </ul>
+
       <Layout isOpen={modals.confirmModal} toggleIsOpen={handleClearData}>
         <Modal
           isActive={modals.confirmModal}
           label="Are you sure want to delete the subject?"
-          acceptLabel="Yes"
-          refuseLabel="No"
           acceptOnClick={handleConfirm}
           refuseOnClick={handleRefuse}
         />
       </Layout>
-
       <Layout isOpen={modals.refuseModal} toggleIsOpen={handleClearData}>
         <Modal
           isActive={modals.refuseModal}
           label={`To delete the subject, please write ${subjectToDelete?.subjectName}?`}
-          acceptLabel="Yes"
-          refuseLabel="No"
           refuseOnClick={handleClearData}
           acceptOnClick={handleValidateName}
           hasInput={true}
@@ -127,4 +92,5 @@ const SubjectList = () => {
     </div>
   );
 };
+
 export default SubjectList;
