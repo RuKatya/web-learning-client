@@ -22,6 +22,9 @@
     opacity: 1;
     transform: translateY(0vh);
   }
+  &:focus {
+    border: 1px solid red;
+  }
 
   &__close {
     @include flexbox(center, center);

@@ -1,4 +1,4 @@
-import { forwardRef, MouseEvent, useState } from 'react';
+import { forwardRef, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import Button from 'components/Button';
@@ -16,8 +16,6 @@ type SubjectProps = {
 
 const Subject = forwardRef<HTMLInputElement, SubjectProps>(
   ({ subjectID, subjectName, handleDelete, handleRefresh, handleUpdateSubject, handleEditClose }, ref) => {
-    // Подумать показывать ли текст или нет
-    // const [isTouched, setTouched] = useState(false);
     return (
       <li id={String(subjectID)} className={css.subject__item}>
         <Link to="#" className={css.subject__link}>
@@ -27,15 +25,7 @@ const Subject = forwardRef<HTMLInputElement, SubjectProps>(
               <Button onClick={handleUpdateSubject} size="xl" position="center">
                 Update
               </Button>
-              <input
-                ref={ref}
-                type="text"
-                // value={isTouched ? subjectName : value}
-                // onChange={(e) => {
-                //   setTouched(true);
-                //   onChangeEdit(e);
-                // }}
-              />
+              <input ref={ref} type="text" />
               <Button onClick={handleEditClose} size="xl" position="center">
                 Close
               </Button>

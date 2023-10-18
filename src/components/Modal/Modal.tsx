@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useRef } from 'react';
 
 import Button from 'components/Button';
 
@@ -32,8 +32,17 @@ const Modal = ({
 }: ModalProps) => {
   const cnModal = classnames(css.modal, isActive && css.active);
 
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (ref.current && isActive) {
+      // ref.current.focus();
+      ref.current.focus();
+    }
+  }, [isActive]);
+
   return (
-    <div className={cnModal}>
+    <div tabIndex={0} className={cnModal} ref={ref}>
       <div className={css.modal__question}>{label}</div>
       <Button size="s" position="center" className={css.modal__close} onClick={refuseOnClick}>
         X

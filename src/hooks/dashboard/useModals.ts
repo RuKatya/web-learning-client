@@ -8,12 +8,13 @@ import { SubjectModel } from 'store/types';
 const useModals = () => {
   const dispatch = useAppDispatch();
 
-  const [subjectToDelete, setSubjectToDelete] = useState<SubjectModel | null>(null);
   const [modals, setModals] = useState({
     confirmModal: false,
     refuseModal: false,
   });
+  const [subjectToDelete, setSubjectToDelete] = useState<SubjectModel | null>(null);
   const [inputState, setInputState] = useState({ value: '', error: '' });
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState((state) => ({ ...state, value: e.target.value }));
   };
@@ -23,10 +24,12 @@ const useModals = () => {
 
   // Focus edit input after render
   useEffect(() => {
-    if (editRef.current) {
+    if (editRef.current && subjectToDelete) {
       editRef.current?.focus();
+      editRef.current.value = subjectToDelete.subjectName;
     }
   }, [isEditInputVisible]);
+
   // Refresh button
   const handleRefresh = (subject: SubjectModel) => {
     console.log('Refresh button ', subject.subjectID, subject.subjectName);

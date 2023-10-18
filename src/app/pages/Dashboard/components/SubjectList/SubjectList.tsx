@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Layout from 'components/Layout';
 import Modal from 'components/Modal';
@@ -7,7 +7,6 @@ import useModals from 'hooks/dashboard/useModals';
 import { thunk } from 'store/dashboard/dashboardReducer';
 import { dashboardSubjects } from 'store/dashboard/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { SubjectModel } from 'store/types';
 
 import Subject from '../Subject';
 

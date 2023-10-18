@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { MouseEvent, PropsWithChildren } from 'react';
+import { MouseEvent, PropsWithChildren, useEffect, useRef } from 'react';
 
 import useKeyUp from 'hooks/useKeyUp';
 
@@ -12,7 +12,6 @@ type LayoutProps = {
 
 const Layout = ({ isOpen, toggleIsOpen, children }: LayoutProps) => {
   const cnLayoutButton = classnames(css.layout, isOpen && css.open);
-
   useKeyUp(toggleIsOpen);
 
   const handle = (e: MouseEvent<HTMLInputElement>) => {
