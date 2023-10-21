@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { IAuthState } from '../types';
+
 import { regThunk, loginThunk, loginOutThunk, checkUserCookies } from './authAPI';
-import { IAuthState } from './types';
 
 const initialState = {
   user: {
@@ -29,7 +30,6 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(regThunk.fulfilled, (state, { payload: { message, continueWork } }) => {
-        console.log('reg', continueWork, message);
         state.status = 'idle';
         state.message = message ? message : '';
         state.continueWork = continueWork ? continueWork : false;
@@ -42,7 +42,6 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(loginThunk.fulfilled, (state, { payload: { continueWork, userRole, userName } }) => {
-        console.log('login', continueWork, userRole, userName);
         state.status = 'idle';
         state.continueWork = continueWork;
         state.user = {
@@ -60,7 +59,7 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(loginOutThunk.fulfilled, (state, { payload: { continueWork, isLogin } }) => {
-        console.log('login', continueWork, isLogin);
+        // console.log('login', continueWork, isLogin);
         state.status = 'idle';
         state.continueWork = continueWork;
         state.user = {
@@ -74,11 +73,9 @@ const authSlice = createSlice({
         state.message = payload ? payload : '';
       })
       .addCase(checkUserCookies.pending, (state) => {
-        console.log('checkout loading');
         state.status = 'loading';
       })
       .addCase(checkUserCookies.fulfilled, (state, { payload: { continueWork, isLogin, userName, userRole } }) => {
-        console.log('checkout fullfield');
         state.status = 'idle';
         state.continueWork = continueWork;
         state.user = {
@@ -88,7 +85,6 @@ const authSlice = createSlice({
         };
       })
       .addCase(checkUserCookies.rejected, (state, { payload }) => {
-        console.log('checkout reject');
         state.status = 'failed';
         state.message = payload ? payload : '';
       });

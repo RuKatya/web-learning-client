@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react';
-// import Layout from 'components/Layout';
+
+import ToggleBtn from 'components/ToggleBtn';
+
 import useMatchMedia from 'hooks/useMatchMedia';
 
 import Burger from './components/Burger';
@@ -17,9 +19,9 @@ const Header = () => {
 
   return (
     <header className={css.header}>
+      <ToggleBtn />
       {isMobile && <Burger isOpen={isOpen} toggleIsOpen={toggleIsOpen} />}
       <NavigationList isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
-      {/* <Layout toggleIsOpen={toggleIsOpen} isOpen={isOpen}></Layout> */}
     </header>
   );
 };

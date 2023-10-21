@@ -1,0 +1,32 @@
+@import "styles/forward.scss";
+
+.subject {
+  margin-top: $space-l;
+
+  .subject__list {
+    @include flexbox(flex-start, flex-start, $space-m);
+    flex-wrap: wrap;
+  }
+
+  .subject__add {
+    margin-top: $space-l;
+
+    &__input {
+      padding: $space-s $space-l;
+
+      border-radius: 8px;
+      background-color: red;
+    }
+
+    &__btn {
+      margin-left: $space-m;
+      padding: $space-s $space-l;
+
+      font-size: 20px;
+      border: 1px solid red;
+    }
+  }
+
+  // .subject__input_add {
+  // }
+}

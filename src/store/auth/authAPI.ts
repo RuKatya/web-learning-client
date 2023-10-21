@@ -10,8 +10,6 @@ type RejectValue = {
   rejectValue: string;
 };
 
-// try: Вынести функции в одну
-
 export const regThunk = createAsyncThunk<ResponseRegistration, RegThunkResponse, RejectValue>(
   ROUTES.auth.saveUser.mask,
   async (state, { rejectWithValue }) => {

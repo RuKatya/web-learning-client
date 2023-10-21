@@ -1,9 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+
 import authReducer from './auth/authReducer';
+import dashboardReducer from './dashboard/dashboardReducer';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    dashboard: dashboardReducer,
   },
 });
 

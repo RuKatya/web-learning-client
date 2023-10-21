@@ -1,20 +1,20 @@
 import { FC, FormEvent, useEffect } from 'react';
-import { Form, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import Button, { ButtonPositionEnum, ButtonSizeEnum } from 'components/Button';
+import Button from 'components/Button';
+import FormInput from 'components/Forms/FormInput';
 import StatusMessage from 'components/Forms/StatusMessage';
-import Input from 'components/Input';
 
 import { clearMessageContinueWork } from 'store/auth/authReducer';
 import { auth } from 'store/auth/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
-import { IInputForm } from '../../../config/types';
+import { FormInputT } from '../../../config/types';
 
 import css from './AuthForm.module.scss';
 
 interface IAuthFormProps {
-  inputs: IInputForm[];
+  inputs: FormInputT[];
   title: string;
   question: string;
   linkToBtn: string;
@@ -58,16 +58,14 @@ const AuthForm: FC<IAuthFormProps> = ({
 
       <ul className={css.inputs__list}>
         {inputs.map((el) => (
-          <Input key={el.name} {...el} />
+          <FormInput key={el.name} {...el} />
         ))}
       </ul>
 
       <Button
         type="submit"
-        borderWidth={2}
-        borderColor="green"
-        size={ButtonSizeEnum.MEDIUM}
-        position={ButtonPositionEnum.CENTER}
+        size="m"
+        position="center"
         style={{ marginBottom: 10 }}
         spinnerWidth={20}
         spinnerHeight={20}

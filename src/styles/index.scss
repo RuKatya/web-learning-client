@@ -1,18 +1,11 @@
 @import "./reset.scss";
 @import "./forward.scss";
 
-html,
-body,
-#root,
-.app,
-.container {
-  height: 100%;
-}
-
 html {
   font-family: "Times New Roman", sans-serif;
   font-size: 16px;
   color: $text-primary;
+  min-height: 100vh;
 }
 
 body {
@@ -29,6 +22,11 @@ a {
   &:hover {
     color: yellow;
     // background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+button {
+  &:focus {
+    border: 1px solid red;
   }
 }
 //

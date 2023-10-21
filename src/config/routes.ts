@@ -18,13 +18,27 @@ export const ROUTES = {
     },
   },
   profile: {
-    mask: 'user-profile',
+    mask: '/user-profile',
   },
   dashboard: {
-    mask: 'admin-dashboard',
+    mask: '/dashboard',
+    subjects: {
+      mask: '/dashboard/subjects/get-all-subjects',
+      addSubject: {
+        mask: '/dashboard/subjects/save-new-subject',
+      },
+      deleteSubject: {
+        mask: '/dashboard/subjects/delete-subject',
+        // .delete('/delete-subject', removeSubject);  // Remove Subject
+      },
+      refreshSubject: {
+        mask: '/dashboard/subjects/update-subject',
+        // .patch('/update-subject', updateSubject);
+      },
+    },
   },
   favQuizes: {
-    mask: 'user-save-quizes',
+    mask: 'save-user-quizes',
   },
   statistic: {
     mask: 'user-statistic',

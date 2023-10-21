@@ -45,14 +45,11 @@ const NavigationList = ({ isOpen, toggleIsOpen }: NavigationListProps) => {
               <span className={css.navigation__label}>Statistics</span>
             </NavLink>
           </li>
-
-          {userRole === 'user' && (
-            <li className={css.navigation__item}>
-              <NavLink className={handleActiveLinkClass} to={ROUTES.profile.mask}>
-                <span className={css.navigation__label}>Profile</span>
-              </NavLink>
-            </li>
-          )}
+          <li className={css.navigation__item}>
+            <NavLink className={handleActiveLinkClass} to={ROUTES.profile.mask}>
+              <span className={css.navigation__label}>Profile</span>
+            </NavLink>
+          </li>
 
           {userRole === 'admin' && (
             <li className={css.navigation__item}>
@@ -64,7 +61,6 @@ const NavigationList = ({ isOpen, toggleIsOpen }: NavigationListProps) => {
         </>
       )}
 
-      {/* <li onClick={isLogin ? handleLogout : toggleIsOpen} className={css.navigation__item_login}> */}
       <li onClick={isLogin ? handleLogout : undefined} className={css.navigation__item_login}>
         <NavLink className={handleActiveLinkClass} to={ROUTES.auth.mask}>
           <span className={css.navigation__label}>{isLogin ? 'Sign Out' : 'Sign In'}</span>
